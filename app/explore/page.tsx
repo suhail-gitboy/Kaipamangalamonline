@@ -8,8 +8,8 @@ const page = () => {
     return (
         <>
             <Searchexplore />
-            <main className='px-4 py-2  md:flex md:px-14 lg:px-17 '>
-                <section className=' md:block md:w-2/8'>
+            <main className='px-4 py-2  md:flex md:px-14 lg:px-17 mt-40'>
+                <section className='hidden md:block md:w-2/8'>
                     <h1 className='text-2xl font-bold'>Explore</h1>
                     <p className='mt-2 text-sm text-gray-600'>Discover new content and connect with others.</p>
                 </section>
