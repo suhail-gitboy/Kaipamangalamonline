@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Barbottom from "./components/layout/Barbottom";
+import { AnimatePresence } from "framer-motion";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-hide">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AnimatePresence mode="wait">
+
+
+          {children}
+        </AnimatePresence>
       </body>
     </html>
   );
