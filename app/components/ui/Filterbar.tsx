@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Close from '../rusable/Close';
 import { Filterdata } from '@/app/libs/Datas';
 import { motion } from 'framer-motion';
+import { useSwipeable } from 'react-swipeable';
 
 const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
@@ -24,12 +25,16 @@ const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Di
     ];
 
     const categories = Filterdata.filter(a => a.filter).map(a => a.activity);
-
+    const handlers = useSwipeable({
+        onSwipedDown: () => Setfilter(false),
+        preventScrollOnSwipe: true,
+        trackTouch: true
+    })
     return (
-        <motion.div initial={{ opacity: 0, y: 1000 }} transition={{ duration: 0.2 }}
-            exit={{ opacity: 0.3 }} animate={{ opacity: 1, y: 0 }} className={` ${filter ? "translate-y-0" : "translate-y-full"} md:translate-0 transition-transform duration-300 inset-0 fixed bg-black/65 z-50  md:fixed md:inset-0 md:bg-black/35  md:min-h-screen md:flex md:flex-col md:justify-center md:items-center`}>
+        <motion.div initial={{ opacity: 0, y: 1000 }} transition={{ duration: 0.5 }}
+            animate={{ opacity: 1, y: 0 }} className={` ${filter ? "translate-y-0" : "translate-y-full"} md:translate-0 transition-transform duration-300 inset-0 fixed bg-black/65 z-50  md:fixed md:inset-0 md:bg-black/35  md:min-h-screen md:flex md:flex-col md:justify-center md:items-center`}>
             <Close onClick={() => Setfilter(prev => !prev)} />
-            <div className="absolute rounded-t-4xl bottom-0 left-0 right-0 z-50 md:static p-6 bg-gradient-to-b from-lime-200 to-lime-50 md:rounded-xl w-full md:w-md shadow-lg">
+            <div {...handlers} className="absolute rounded-t-4xl bottom-0 left-0 right-0 z-50 md:static p-6 bg-gradient-to-b from-lime-200 to-lime-50 md:rounded-xl w-full md:w-md shadow-lg">
                 <div className="md:hidden flex justify-center  py-2 ">
                     <h1 className='w-2/4 h-2 rounded-full bg-white'></h1>
 

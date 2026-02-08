@@ -44,15 +44,11 @@ const Searchexplore = () => {
     ];
 
 
-    const handlers = useSwipeable({
-        onSwipedDown: () => Setfilter(false),
-        preventScrollOnSwipe: true,
-        trackTouch: true
-    })
+
     const [filter, Setfilter] = useState<boolean>(false)
     return (
         <div className='bg-white fixed top-0 left-0 right-0 z-40 h-auto' >
-            {filter && <Filterbar {...handlers} filter={filter} Setfilter={Setfilter} />}
+            {filter && <Filterbar filter={filter} Setfilter={Setfilter} />}
             <h3 className=" text-gray-400 px-4 pt-2  md:pb-2 text-md  font-semibold  md:text-2xl flex items-baseline md:justify-center"> <FaLocationDot className='text-xl text-lime-500' />Kaipamangalam</h3>
             <div className='bg-white items-center md:justify-between gap-3 px-3 flex  md:px-10 lg:px-20 pt-3'>
                 <Link href={"/"} className='bg-bg p-3 rounded-full'><IoMdReturnLeft className='text-xl' /></Link>
