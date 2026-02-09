@@ -1,7 +1,7 @@
 import { FaUtensils, FaCar, FaFutbol, FaMapMarkerAlt } from "react-icons/fa";
 
-const MapHeader = ({ type = "sports" }) => {
-    const config = {
+const MapHeader = ({ type = "sports" }: { type: string }) => {
+    const config: any = {
         fooddelivery: {
             title: "Hungry near Kaipamangalam?",
             subtitle: "Discover hotels, food spots & quick bites near you",
@@ -28,7 +28,7 @@ const MapHeader = ({ type = "sports" }) => {
         },
     };
 
-    const current = config[type] || config.sports;
+    const current: any = config[type];
 
     return (
         <div
@@ -55,7 +55,7 @@ const MapHeader = ({ type = "sports" }) => {
 
             {/* Chips */}
             <div className="flex flex-wrap gap-2 mt-4">
-                {current.chips.map((chip, i) => (
+                {current.chips.map((chip: any, i: any) => (
                     <span
                         key={i}
                         className="px-3 py-1 text-xs font-semibold rounded-full bg-white text-gray-700 shadow-sm"
