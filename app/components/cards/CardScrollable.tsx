@@ -393,10 +393,10 @@ const CardScrollable = ({ data }: { data: CardProps }) => {
                                 </h3>
 
                                 {/* EVENT FIXTURE */}
-                                {type === "event" && fixture && (
+                                {category === "event" && (
                                     <div className="flex items-center gap-1 text-xs text-gray-600">
                                         <FaCalendarAlt className="text-lime-600" />
-                                        <span>{new Date(fixture).toDateString()}</span>
+                                        <span>{ }</span>
                                     </div>
                                 )}
 

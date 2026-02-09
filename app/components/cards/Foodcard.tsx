@@ -18,7 +18,7 @@ export interface Items {
     };
 }
 
-export default function RestaurantList({ item }: Items[]) {
+export default function RestaurantList({ item }: { item: Items }) {
     return (
 
 
