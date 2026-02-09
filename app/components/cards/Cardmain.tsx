@@ -46,6 +46,7 @@ const ServiceCard = ({
             {/* Right */}
             <button
                 className="
+                hidden md:block
       rounded-full bg-gradient-to-br from-slate-900 to-slate-700
       hover:from-slate-700 hover:to-slate-500
       text-[10px] font-semibold text-white

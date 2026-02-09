@@ -146,6 +146,17 @@ export const Scrollabledatas: CardProps[] = [
 
     },
     {
+        image: "https://st.perplexity.ai/estatic/0b226c450798410ac541646c86ec31afd840e5beab817a5d84fa821e7db61981ec84c3b4a3f072a7a2e1899c9fb06c6e70ac1b55267f334b11355554fb84e045760a9369f37ef9c3ecfffb08076fd24aa7d32a86e585b930d44a63d72a957fa9",
+        title: "turf open monday-sunday",
+        location: "chentrappini, Kaipamangalam",
+
+        category: "tournament",
+        type: "turf",
+        fixture: "2024-07-15T18:00:00"
+
+    },
+
+    {
         image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
         title: "Beautiful Sea View House in Moonnupeedika",
         location: "Moonnupeedika, Kaipamangalam",
@@ -187,3 +198,203 @@ export const Scrollabledatas: CardProps[] = [
 
     },
 ]
+
+export const mapPPath = [
+    {
+        _id: "rest_001",
+        name: "Moonnupeedika Food Court",
+        title: "Multi-cuisine snacks & meals",
+        location: {
+            lat: 10.3619,
+            lng: 76.1152, // Moonnupeedika
+        },
+        images: [
+            {
+                url: "https://images.unsplash.com/photo-1604908177522-432c67f3bdbf",
+                public_id: "moonnupeedika_food_01",
+            },
+        ],
+    },
+    {
+        _id: "rest_002",
+        name: "Koprakalam Dine",
+        title: "Traditional Kerala food",
+        location: {
+            lat: 10.3498,
+            lng: 76.1215, // Koprakalam
+        },
+        images: [
+            {
+                url: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+                public_id: "koprakalam_dine_01",
+            },
+        ],
+    },
+    {
+        _id: "rest_003",
+        name: "Chentrappinni Cafe",
+        title: "Tea, snacks & quick bites",
+        location: {
+            lat: 10.3376,
+            lng: 76.1328, // Chentrappinni
+        },
+        images: [
+            {
+                url: "https://images.unsplash.com/photo-1548365328-5f02a04a27b8",
+                public_id: "chentrappinni_cafe_01",
+            },
+        ],
+    },
+    {
+        _id: "rest_004",
+        name: "Koorikuzhi Grill House",
+        title: "Grilled chicken & fast food",
+        location: {
+            lat: 10.3584,
+            lng: 76.1096, // Koorikuzhi
+        },
+        images: [
+            {
+                url: "https://images.unsplash.com/photo-1606755962773-0d0f76a8eeb6",
+                public_id: "koorikuzhi_grill_01",
+            },
+        ],
+    },
+];
+
+export const restaurants = [
+    {
+        _id: "rest_kpm_001",
+        name: "Spice Route Kitchen",
+        rating: 4.6,
+        deliveryTime: "20–30 mins",
+        cuisine: ["Kerala", "Seafood"],
+        offer: "ITEMS AT ₹99",
+
+        location: {
+            area: "Kaipamangalam",
+            city: "Thrissur",
+            lat: 10.3606,
+            lng: 76.1422,
+        },
+
+        image: {
+            url: "https://images.unsplash.com/photo-1604908177522-432c6b7c8f09",
+            publicId: "kaipamangalam_spice_route",
+        },
+    },
+
+    {
+        _id: "rest_kpm_002",
+        name: "Coastal Flames",
+        rating: 4.4,
+        deliveryTime: "25–35 mins",
+        cuisine: ["Grill", "Arabian"],
+        offer: "FLAT ₹120 OFF",
+
+        location: {
+            area: "Moonnupeedika",
+            city: "Thrissur",
+            lat: 10.3489,
+            lng: 76.1195,
+        },
+
+        image: {
+            url: "https://images.unsplash.com/photo-1544025162-d76694265947",
+            publicId: "moonnupeedika_coastal_flames",
+        },
+    },
+
+    {
+        _id: "rest_kdl_001",
+        name: "Kodungallur Pizza Hub",
+        rating: 4.5,
+        deliveryTime: "30–40 mins",
+        cuisine: ["Pizzas", "Fast Food"],
+        offer: "ITEMS AT ₹49",
+
+        location: {
+            area: "Kodungallur",
+            city: "Thrissur",
+            lat: 10.2203,
+            lng: 76.1975,
+        },
+
+        image: {
+            url: "https://images.unsplash.com/photo-1601924579446-1a2c1c1f1b4c",
+            publicId: "kodungallur_pizza_hub",
+        },
+    },
+
+    {
+        _id: "rest_kdl_002",
+        name: "Mallu Mandi House",
+        rating: 4.7,
+        deliveryTime: "35–45 mins",
+        cuisine: ["Mandi", "Arabian"],
+        offer: "FREE DELIVERY",
+
+        location: {
+            area: "Kodungallur",
+            city: "Thrissur",
+            lat: 10.2261,
+            lng: 76.2023,
+        },
+
+        image: {
+            url: "https://images.unsplash.com/photo-1627662056598-0d89b5a3e7c7",
+            publicId: "kodungallur_mallu_mandi",
+        },
+    },
+];
+
+export const favouriteDishes = [
+    {
+        id: "dish_01",
+        name: "Alfaham",
+        image: "https://images.unsplash.com/photo-1628294896516-344152572ee3",
+        color: "bg-red-100",
+    },
+    {
+        id: "dish_02",
+        name: "Shawarma",
+        image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec",
+        color: "bg-orange-100",
+    },
+    {
+        id: "dish_03",
+        name: "Kappa & Combos",
+        image: "https://images.unsplash.com/photo-1626776877084-07b1e0edb7c1",
+        color: "bg-yellow-100",
+    },
+    {
+        id: "dish_04",
+        name: "Mandhi",
+        image: "https://images.unsplash.com/photo-1625943555419-56a2cb596640",
+        color: "bg-amber-100",
+    },
+    {
+        id: "dish_05",
+        name: "Fried Rice",
+        image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
+        color: "bg-green-100",
+    },
+    {
+        id: "dish_06",
+        name: "Biriyani",
+        image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0",
+        color: "bg-lime-100",
+    },
+    {
+        id: "dish_07",
+        name: "Shakes",
+        image: "https://images.unsplash.com/photo-1577805947697-89e18249d767",
+        color: "bg-pink-100",
+    },
+    {
+        id: "dish_08",
+        name: "Burger",
+        image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+        color: "bg-blue-100",
+    },
+];

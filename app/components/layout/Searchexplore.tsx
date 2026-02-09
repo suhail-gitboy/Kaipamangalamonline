@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
 
+
 import { IoMdReturnLeft } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { VscSettings } from "react-icons/vsc";
@@ -52,6 +53,10 @@ const Searchexplore = () => {
             activity: "auto service", icon: "/icons/taxi.png",
             action: "autoservice"
         },
+        {
+            activity: "book turf", icon: "/icons/cricket.png",
+            action: "turf"
+        },
         { activity: "news", icon: "/icons/news-report.png", filter: "news" },
 
         { activity: "Fashion", icon: "/icons/clothes-hanger.png", filter: "fashion" },
@@ -68,11 +73,13 @@ const Searchexplore = () => {
     return (
         <AnimatePresence>
             <motion.div transition={{ type: "spring", stiffness: 300, damping: 30 }} animate={{ y: showNavbar ? 0 : -100 }} className='bg-white fixed top-0 left-0 right-0 z-40 h-auto' >
+                <AnimatePresence>
 
-                {filter && <Filterbar filter={filter} Setfilter={Setfilter} />}
 
+                    {filter && <Filterbar filter={filter} Setfilter={Setfilter} />}
 
-                <h3 className=" text-gray-400 px-4 pt-2  md:pb-2 text-md  font-semibold  md:text-2xl flex items-baseline md:justify-center"> <FaLocationDot className='text-xl text-lime-500' />Kaipamangalam</h3>
+                </AnimatePresence>
+
                 <div className='bg-white items-center md:justify-between gap-3 px-3 flex  md:px-10 lg:px-20 pt-3'>
                     <Link href={"/"} className='bg-bg p-3 rounded-full'><IoMdReturnLeft className='text-xl' /></Link>
 
@@ -106,21 +113,24 @@ const Searchexplore = () => {
                                         router.push(`/services/${data.action}`)
                                     }
                                 }}
-                                className="
+                                className={`
           group
           flex items-center gap-2
           px-4 py-2
           rounded-full
-          bg-gray-100 text-gray-700
+
+          ${data.action ? "bg-blue-200  hover:bg-blue-400 hover:text-black" : "bg-gray-100   hover:bg-lime-100 hover:text-lime-700"}
+          text-gray-700
           text-sm font-medium
           shadow-sm
-          hover:bg-lime-100 hover:text-lime-700
+
+
           focus:bg-lime-300 focus:ring-2 focus:ring-lime-400
           active:scale-95
           transition
           whitespace-nowrap
           flex-shrink-0
-        "
+        `}
                             >
                                 <Image
                                     src={data.icon}

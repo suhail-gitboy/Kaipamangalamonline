@@ -14,16 +14,17 @@ const Usercad = () => {
     return (
         <div
 
-        >
+            className='' >
             {editprof && <EditProfilePage editprofile={() => Seteditprof(false)} />}
 
-            <Card className="rounded-3xl border-lime-200 shadow-md">
-                <CardContent className="p-6 flex flex-col md:flex-row items-center gap-6">
+            <div className="rounded-3xl border-lime-200 shadow-md relative" >
+                <div className="absolute md:hidden  bg-lime-600 -top-0 left-0 w-full h-1/2 rounded-b-full"></div>
+                <div className="p-6 flex flex-col md:flex-row items-center gap-6">
 
                     {/* Avatar */}
                     <div className="relative">
                         <img
-                            src="https://i.pravatar.cc/200"
+                            src="/G.png"
                             alt="profile"
                             className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-lime-400"
                         />
@@ -59,8 +60,8 @@ const Usercad = () => {
                             </Button>
                         </div>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
         </div>
     )
 }

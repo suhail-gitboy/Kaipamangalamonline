@@ -9,24 +9,31 @@ const page = () => {
     return (
         <>
             <Searchexplore />
-            <main className='px-4 py-2  md:flex md:px-14 lg:px-17 mt-36'>
-                <section className='hidden md:block md:w-2/8'>
-                    <h1 className='text-2xl font-bold'>Explore</h1>
-                    <p className='mt-2 text-sm text-gray-600'>Discover new content and connect with others.</p>
+            <main className="px-4 sm:px-8 py-2 mt-24 md:flex md:px-14 lg:px-20 gap-6">
+
+                {/* LEFT – Sticky */}
+                <section className="
+    hidden md:block 
+    md:w-2/8 
+    md:sticky 
+    md:top-44 
+    self-start
+  ">
+                    <h1 className="text-2xl font-bold">Explore</h1>
+                    <p className="mt-2 text-sm text-gray-600">
+                        Discover new content and connect with others.
+                    </p>
                 </section>
-                <section className='w-full scrollbar-hide overflow-y-auto h-160 md:w-4/8 flex flex-col gap-y-4'>
-                    {
-                        Scrollabledatas.map((data, ind) => (
-                            <CardScrollable data={data} />
-                        ))
-                    }
 
-
-
+                {/* RIGHT – Scrollable content */}
+                <section className="w-full md:w-4/8 flex flex-col ">
+                    {Scrollabledatas.map((data, ind) => (
+                        <CardScrollable key={ind} data={data} />
+                    ))}
                 </section>
-
 
             </main>
+
 
 
             <Barbottom />

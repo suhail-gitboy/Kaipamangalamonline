@@ -8,7 +8,7 @@ export default function LocalNewsCard() {
     const [isNew, setIsNew] = useState(true) // highlight new news
 
     return (
-        <div className="md:flex justify-center md:py-5">
+        <div className="md:flex justify-center md:py-2">
             <div
                 className={` md:auto relative flex items-center justify-between rounded-xl p-4 border ${isNew ? "bg-yellow-50 border-yellow-200" : "bg-white border-slate-200"
                     } shadow-sm hover:shadow-md transition`}
@@ -34,7 +34,7 @@ export default function LocalNewsCard() {
 
                 {/* Right */}
                 <button
-                    className="rounded-full bg-lime-600 px-3 py-1 text-xs font-medium text-white hover:bg-lime-700 transition"
+                    className="hidden md:block rounded-full bg-lime-600 px-3 py-1 text-xs font-medium text-white hover:bg-lime-700 transition"
                     onClick={() => alert("Read latest news")}
                 >
                     Read the latest
@@ -45,6 +45,7 @@ export default function LocalNewsCard() {
                     <span className="absolute top-2 left-2 h-2 w-2 rounded-full bg-red-500 animate-pulse" />
                 )}
             </div>
+
         </div>
 
 
