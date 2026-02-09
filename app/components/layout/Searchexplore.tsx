@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
 
 import { IoMdReturnLeft } from "react-icons/io";
@@ -16,7 +16,24 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const Searchexplore = () => {
 
+    const [showNavbar, setShowNavbar] = useState(true);
+    const lastScrollY = useRef(0);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > lastScrollY.current) {
+
+                setShowNavbar(false);
+            } else {
+                // scrolling up → show
+                setShowNavbar(true);
+            }
+            lastScrollY.current = window.scrollY;
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     const router = useRouter()
     interface Activity {
         activity: string,
@@ -49,28 +66,29 @@ const Searchexplore = () => {
 
     const [filter, Setfilter] = useState<boolean>(false)
     return (
-        <div className='bg-white fixed top-0 left-0 right-0 z-40 h-auto' >
-            <AnimatePresence>
+        <AnimatePresence>
+            <motion.div transition={{ type: "spring", stiffness: 300, damping: 30 }} animate={{ y: showNavbar ? 0 : -100 }} className='bg-white fixed top-0 left-0 right-0 z-40 h-auto' >
+
                 {filter && <Filterbar filter={filter} Setfilter={Setfilter} />}
-            </AnimatePresence>
 
-            <h3 className=" text-gray-400 px-4 pt-2  md:pb-2 text-md  font-semibold  md:text-2xl flex items-baseline md:justify-center"> <FaLocationDot className='text-xl text-lime-500' />Kaipamangalam</h3>
-            <div className='bg-white items-center md:justify-between gap-3 px-3 flex  md:px-10 lg:px-20 pt-3'>
-                <Link href={"/"} className='bg-bg p-3 rounded-full'><IoMdReturnLeft className='text-xl' /></Link>
 
-                <div className='w-full md:w-2/4 flex  rounded-4xl  px-4 py-3 md:py-3  items-center bg-neutral-100'>
-                    <CiSearch className='text-muted text-2xl' />
-                    <input type="text" placeholder='search by shop,type' className='  px-2 w-full outline-0 underline-0 rounded-full text-muted text-md ' />
-                    <IoMdClose />
+                <h3 className=" text-gray-400 px-4 pt-2  md:pb-2 text-md  font-semibold  md:text-2xl flex items-baseline md:justify-center"> <FaLocationDot className='text-xl text-lime-500' />Kaipamangalam</h3>
+                <div className='bg-white items-center md:justify-between gap-3 px-3 flex  md:px-10 lg:px-20 pt-3'>
+                    <Link href={"/"} className='bg-bg p-3 rounded-full'><IoMdReturnLeft className='text-xl' /></Link>
+
+                    <div className='w-full md:w-2/4 flex  rounded-4xl  px-4 py-3 md:py-3  items-center bg-neutral-100'>
+                        <CiSearch className='text-muted text-2xl' />
+                        <input type="text" placeholder='search by shop,type' className='  px-2 w-full outline-0 underline-0 rounded-full text-muted text-md ' />
+                        <IoMdClose />
+                    </div>
+                    <button onClick={() => Setfilter(prev => !prev)} className='bg-bg text-muted p-3 rounded-full'><VscSettings className='text-2xl text-muted ' /></button>
+
+
                 </div>
-                <button onClick={() => Setfilter(prev => !prev)} className='bg-bg text-muted p-3 rounded-full'><VscSettings className='text-2xl text-muted ' /></button>
 
-
-            </div>
-
-            <div className="px-4 pb-2 mt-3 mb-2 flex justify-center">
-                <div
-                    className="
+                <div className="px-4  mt-2 mb-2 flex justify-center">
+                    <div
+                        className="
       flex gap-2
       overflow-x-auto md:overflow-visible
       scrollbar-hide
@@ -79,16 +97,16 @@ const Searchexplore = () => {
       md:justify-center
       md:max-w-4xl
     "
-                >
-                    {Activity.map((data, ind) => (
-                        <button
-                            key={ind}
-                            onClick={() => {
-                                if (data.action) {
-                                    router.push(`/services/${data.action}`)
-                                }
-                            }}
-                            className="
+                    >
+                        {Activity.map((data, ind) => (
+                            <button
+                                key={ind}
+                                onClick={() => {
+                                    if (data.action) {
+                                        router.push(`/services/${data.action}`)
+                                    }
+                                }}
+                                className="
           group
           flex items-center gap-2
           px-4 py-2
@@ -103,26 +121,27 @@ const Searchexplore = () => {
           whitespace-nowrap
           flex-shrink-0
         "
-                        >
-                            <Image
-                                src={data.icon}
-                                width={22}
-                                height={22}
-                                alt="icon"
-                                className="
+                            >
+                                <Image
+                                    src={data.icon}
+                                    width={22}
+                                    height={22}
+                                    alt="icon"
+                                    className="
             shrink-0
             group-hover:scale-110
             transition
           "
-                            />
+                                />
 
-                            <span>{data.activity}</span>
-                        </button>
-                    ))}
+                                <span>{data.activity}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </motion.div>
+        </AnimatePresence>
     )
 }
 

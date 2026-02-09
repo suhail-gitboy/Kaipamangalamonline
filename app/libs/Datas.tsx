@@ -1,3 +1,5 @@
+import { CardProps } from "../components/cards/CardScrollable";
+
 export const areaServices = [
     {
         id: "taxi",
@@ -105,3 +107,84 @@ export const Filterdata: Activity[] = [
     { activity: "Fest", icon: "/icons/celebration.png", filter: "fest" },
     { activity: "catering", icon: "/icons/catering.png", filter: "catering" },
 ];
+
+export const Scrollabledatas: CardProps[] = [
+    {
+        category: "news",
+        type: "public",
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        category: "chaispot",
+        type: "cafe",
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        category: "grocery",
+        type: "all"
+
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+
+        category: "tournament",
+        type: "cricket",
+
+        date: new Date("2024-07-15T18:00:00"),
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        type: "shop",
+        category: "fashion",
+
+
+
+    },
+    {
+
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        type: "sale",
+        category: "sale",
+        price: "25lakhs"
+
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        type: "football",
+        category: "tournament",
+
+
+
+    },
+    {
+        image: "https://media-cdn.tripadvisor.com/media/photo-m/1280/2e/99/e4/e1/profitez-de-notre-terrasse.jpg",
+        title: "Beautiful Sea View House in Moonnupeedika",
+        location: "Moonnupeedika, Kaipamangalam",
+        type: "cricket",
+        category: "tournament",
+
+
+
+    },
+]

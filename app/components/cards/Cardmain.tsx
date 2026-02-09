@@ -3,7 +3,8 @@ type ServiceCardProps = {
     title: string
     subtitle: string
     action: string
-    iconBg: string
+    iconBg: string,
+
 }
 
 const ServiceCard = ({

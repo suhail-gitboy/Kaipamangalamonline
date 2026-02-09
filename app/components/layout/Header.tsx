@@ -43,8 +43,8 @@ const Header = () => {
             </div>
             {/* servicesicons */}
 
-            <div className="md:flex justify-center">
-                <div className="flex items-center  md:w-fit mx-9 space-x-2 scrollbar-hide overflow-x-auto">
+            <div className="md:flex justify-center overflow-hidden">
+                <div className="flex items-center  md:w-fit mx-4 space-x-1 scrollbar-hide overflow-x-auto">
                     {Activity.map((data) => (
                         <div
                             key={data.activity}
@@ -54,7 +54,7 @@ const Header = () => {
                                 <Image alt="icon" src={data.icon} height={35} width={36} />
                             </div>
 
-                            <p className="pt-2 text-xs text-black text-center h-8">
+                            <p className="pt-2 text-xs text-muted text-center h-8">
                                 {data.activity}
                             </p>
                         </div>
@@ -68,7 +68,7 @@ const Header = () => {
                 <div className="pt-1 flex justify-center flex-col gap-5">
 
                     <div className="flex justify-center items-center">
-                        <div className="hidden md:grid grid-cols-2 justify-center w-7/8 gap-3 py-3  ">
+                        <div className="hidden md:grid grid-cols-2 justify-center w-7/8 gap-1 py-3  ">
                             {areaServices.map((service) => (
                                 <ServiceCard key={service.id} {...service} />
                             ))}
