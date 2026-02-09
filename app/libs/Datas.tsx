@@ -142,8 +142,7 @@ export const Scrollabledatas: CardProps[] = [
 
         category: "tournament",
         type: "cricket",
-
-        date: new Date("2024-07-15T18:00:00"),
+        fixture: "2024-07-15T18:00:00"
 
     },
     {

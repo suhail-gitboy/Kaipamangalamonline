@@ -29,6 +29,7 @@ export interface CardProps {
     category?: string; // news/shop/tournament
     user?: string;
     time?: string;
+    fixture?: string
 }
 
 const CardScrollable = ({ data }: { data: CardProps }) => {
