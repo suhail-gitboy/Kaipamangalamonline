@@ -396,7 +396,7 @@ const CardScrollable = ({ data }: { data: CardProps }) => {
                                 {category === "event" && (
                                     <div className="flex items-center gap-1 text-xs text-gray-600">
                                         <FaCalendarAlt className="text-lime-600" />
-                                        <span>{ }</span>
+                                        <span>12-34 FEB</span>
                                     </div>
                                 )}
 
