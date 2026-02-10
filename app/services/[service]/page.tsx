@@ -1,9 +1,11 @@
 import RestaurantList from '@/app/components/cards/Foodcard'
 import MapLocation from '@/app/components/ui/Map'
-import { restaurants } from '@/app/libs/Datas'
+import { carServices, restaurants, turfs } from '@/app/libs/Datas'
 import React, { use } from 'react'
 import Searchexplore from './ui/SEarch'
 import { motion } from 'framer-motion'
+import CarServiceCard from '@/app/components/cards/Carservices'
+import TurfCard from '@/app/components/cards/Turf'
 
 
 type pArams = {
@@ -16,6 +18,36 @@ const page = async ({ params }: pArams) => {
 
     const { service } = await params
 
+
+
+    const FunctionSwitch = () => {
+        switch (service) {
+            case "fooddelivery": return (
+                <div className="space-y-2">
+                    {restaurants.map((data, key) => (
+                        <RestaurantList item={data} key={key} />
+                    ))}
+                </div>
+            )
+
+            case "autoservices": return (
+                <div className="space-y-2">
+                    {carServices.map((data, key) => (
+                        <CarServiceCard item={data} key={key} />
+                    ))}
+                </div>
+            )
+
+            case "turf": return (
+                <div className="space-y-2">
+                    {turfs.map((data, key) => (
+                        <TurfCard item={data} key={key} />
+                    ))}
+                </div>
+            )
+        }
+    }
+
     return (
         <div>
             <Searchexplore service={service} />
@@ -24,17 +56,13 @@ const page = async ({ params }: pArams) => {
                 <div className="flex w-full gap-3  overflow-visible">
 
                     <section className="w-full md:w-6/12">
-                        <div className="space-y-2">
-                            {restaurants.map((data, key) => (
-                                <RestaurantList item={data} key={key} />
-                            ))}
-                        </div>
+                        {FunctionSwitch()}
                     </section>
 
 
                     <section className="hidden md:block md:w-6/12 relative">
-                        <div className={`sticky  ${service === "fooddelivery" ? "h-[70vh] top-45" : "h-150"} `}>
-                            <MapLocation />
+                        <div className={`sticky  h-[70vh] ${service !== "turf" ? "top-45" : "top-23"} `}>
+                            <MapLocation service={service} />
                         </div>
                     </section>
                 </div>

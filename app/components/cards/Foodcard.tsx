@@ -1,5 +1,6 @@
 import { restaurants } from "@/app/libs/Datas";
 import { Star, Sparkles, MoreVertical } from "lucide-react";
+import Link from "next/link";
 export interface Items {
     _id: string;
     name: string;
@@ -22,12 +23,13 @@ export default function RestaurantList({ item }: { item: Items }) {
     return (
 
 
-        <div
+        <Link
+            href={`/viewservice/fooddelivery`}
             key={item._id}
             className="max-w-2xl w-full bg-white border rounded-2xl p-4 flex justify-between gap-4 hover:shadow-lg transition"
         >
             {/* IMAGE */}
-            <div className="relative w-40 h-28 shrink-0">
+            <div className="relative w-40 h-28 shrink-0" >
                 <img
                     src={item.image.url}
                     alt={item.name}
@@ -62,16 +64,9 @@ export default function RestaurantList({ item }: { item: Items }) {
                     {item.cuisine.join(", ")}
                 </p>
 
-                <div className="flex justify-between items-center text-sm text-gray-400">
-                    <span>
-                        {item.location.area}, {item.location.city}
-                    </span>
-                    <span className="text-xs">
-                        {item.location.lat}, {item.location.lng}
-                    </span>
-                </div>
+
             </div>
-        </div>
+        </Link >
 
     );
 }

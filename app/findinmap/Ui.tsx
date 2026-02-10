@@ -18,7 +18,7 @@ const MapHeader = ({ type = "sports" }: { type: string }) => {
             bg: "from-blue-100 to-blue-50",
             accent: "text-blue-600",
         },
-        sports: {
+        turf: {
             title: "Playgrounds & turfs near you",
             subtitle: "Find football turfs & sports arenas nearby",
             icon: <FaFutbol />,

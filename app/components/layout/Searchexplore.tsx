@@ -51,10 +51,10 @@ const Searchexplore = () => {
         },
         {
             activity: "auto service", icon: "/icons/taxi.png",
-            action: "autoservice"
+            action: "autoservices"
         },
         {
-            activity: "book turf", icon: "/icons/cricket.png",
+            activity: "book turf", icon: "/football.png",
             action: "turf"
         },
         { activity: "news", icon: "/icons/news-report.png", filter: "news" },

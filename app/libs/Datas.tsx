@@ -1,4 +1,24 @@
 import { CardProps } from "../components/cards/CardScrollable";
+export interface CarServiceItem {
+    _id: string;
+    type: "taxi" | "rental" | "dailyrental";
+    name: string;
+    images: {
+        url: string;
+        public_id: string
+    };
+    driverName?: string; // only taxi
+    rating: number;
+    price: string;
+    available: boolean;
+    contact?: string; // taxi only
+    location: {
+        area: string;
+        city: string;
+        lat: number;
+        lng: number;
+    }
+}
 
 export const areaServices = [
     {
@@ -6,7 +26,7 @@ export const areaServices = [
         icon: "🚕",
         title: "Auto & Taxi",
         subtitle: "Nearby rides",
-        action: "Book",
+        action: "autoservices",
         iconBg: "bg-slate-100",
     },
     {
@@ -14,7 +34,7 @@ export const areaServices = [
         icon: "🍔",
         title: "Food Delivery",
         subtitle: "Hotels nearby",
-        action: "Order",
+        action: "fooddelivery",
         iconBg: "bg-orange-100",
     },
     {
@@ -42,11 +62,11 @@ export const areaServices = [
         iconBg: "bg-lime-100",
     },
     {
-        id: "news",
+        id: "turfs",
         icon: "📰",
-        title: "Local News",
-        subtitle: "Updates in your area",
-        action: "Read",
+        title: "turf football cricket",
+        subtitle: "playing in nearest turf",
+        action: "turf",
         iconBg: "bg-indigo-100",
     },
 ]
@@ -208,12 +228,10 @@ export const mapPPath = [
             lat: 10.3619,
             lng: 76.1152, // Moonnupeedika
         },
-        images: [
-            {
-                url: "https://images.unsplash.com/photo-1604908177522-432c67f3bdbf",
-                public_id: "moonnupeedika_food_01",
-            },
-        ],
+        images: {
+            url: "https://images.unsplash.com/photo-1604908177522-432c67f3bdbf",
+            public_id: "moonnupeedika_food_01",
+        },
     },
     {
         _id: "rest_002",
@@ -397,4 +415,161 @@ export const favouriteDishes = [
         image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
         color: "bg-blue-100",
     },
+];
+
+
+// app/libs/Datas.ts
+
+export const carServices = [
+    {
+        _id: "1",
+        type: "taxi",
+        name: "Suhail Taxi Service",
+        images: {
+            url: "https://images.unsplash.com/photo-1549924231-f129b911e442"
+        },
+        driverName: "Rahul",
+        rating: 4.6,
+        price: "₹15/km",
+        available: true,
+        contact: "9876543210",
+        location: {
+            area: "Kaipamangalam",
+            city: "Thrissur",
+            lat: 10.4517,
+            lng: 76.1274
+        }
+    },
+    {
+        _id: "2",
+        type: "rental",
+        name: "Zoom Car Rentals",
+        images: {
+            url: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d"
+        },
+        rating: 4.3,
+        price: "₹2,499/day",
+        available: false,
+        location: {
+            area: "West Fort",
+            city: "Thrissur",
+            lat: 10.5232,
+            lng: 76.2147
+        }
+    },
+    {
+        _id: "3",
+        type: "dailyrental",
+        name: "Daily Ride Rentals",
+        images: {
+            url: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2"
+        },
+        rating: 4.1,
+        price: "₹799/day",
+        available: true,
+        location: {
+            area: "Kodungallur",
+            city: "Thrissur",
+            lat: 10.2204,
+            lng: 76.1970
+        }
+    }
+];
+
+
+
+
+
+export interface TransportService {
+    id: string;
+    name: string;
+    slug: string;
+    image: string;
+    comingSoon?: boolean;
+}
+
+export const transportServices: TransportService[] = [
+    {
+        id: "1",
+        name: "Auto Taxi",
+        slug: "autotaxi",
+        image: "/carstype/auto.png"
+    },
+    {
+        id: "2",
+        name: "Car Taxi",
+        slug: "car-taxi",
+        image: "/carstype/toyota-innova-crysta-top-model-2393cc-automatic-transmission-turbo-engine-6-speed-gear-free-png.webp"
+    },
+    {
+        id: "3",
+        name: "Rental Cars",
+        slug: "rental-cars",
+        image: "/carstype/swwifttyp2.png"
+    },
+    {
+        id: "4",
+        name: "Daily Rental",
+        slug: "daily-rental",
+        image: "/carstype/bmw.png"
+    },
+
+];
+
+
+// app/libs/Datas.ts
+
+export interface TurfItem {
+    _id: string;
+    name: string;
+    image: {
+        url: string;
+    };
+    timing: string;
+    sports: string[];
+    rating: number;
+    bookingStatus: "available" | "few" | "high";
+    location: {
+        area: string;
+        city: string;
+        lat: number;
+        lng: number;
+    };
+}
+
+export const turfs: TurfItem[] = [
+    {
+        _id: "turf_001",
+        name: "Green Field Turf",
+        image: {
+            url: "https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
+        },
+        timing: "6:00 AM - 10:00 PM",
+        sports: ["Football", "Cricket"],
+        rating: 4.6,
+        bookingStatus: "few",
+        location: {
+            area: "Kaipamangalam",
+            city: "Thrissur",
+            lat: 10.3619,
+            lng: 76.1152
+        }
+    },
+    {
+        _id: "turf_002",
+        name: "Arena Sports Hub",
+        image: {
+            url: "https://images.unsplash.com/photo-1517649763962-0c623066013b"
+        },
+        timing: "5:30 AM - 11:00 PM",
+        sports: ["Football"],
+        rating: 4.3,
+        bookingStatus: "high",
+        location: {
+            area: "Kodungallur",
+            city: "Thrissur",
+            lat: 10.2204,
+            lng: 76.197
+        }
+    }
 ];

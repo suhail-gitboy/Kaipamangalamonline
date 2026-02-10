@@ -9,7 +9,7 @@ const page = async ({ params }: { params: { type: string } }) => {
             <MapHeader type={type} />
 
             <div className="h-136 w-full rounded-2xl overflow-hidden shadow">
-                <MapLocation />
+                <MapLocation service={type} />
             </div>
         </div>
 

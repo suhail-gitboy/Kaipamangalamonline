@@ -13,12 +13,70 @@ import { VscSettings } from "react-icons/vsc";
 import { FaLocationDot } from "react-icons/fa6";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { favouriteDishes } from '@/app/libs/Datas';
+import { favouriteDishes, transportServices } from '@/app/libs/Datas';
 
 const Searchexplore = ({ service }: { service: string }) => {
 
 
+    const FunctionSwitch = () => {
 
+        switch (service) {
+            case "fooddelivery":
+                return (
+
+                    favouriteDishes.map((dish) => (
+                        <motion.button
+                            whileTap={{ scale: 0.94 }}
+                            key={dish.id}
+                            className="min-w-[86px]  flex flex-col items-center gap-2"
+                        >
+                            {/* Image */}
+                            <div
+
+                            >
+                                <img
+                                    src={dish.image}
+                                    alt={dish.name}
+                                    className="w-14 h-14 object-cover rounded-full"
+                                />
+                            </div>
+
+                            {/* Label */}
+                            <span className="text-xs font-semibold text-gray-800 text-center">
+                                {dish.name}
+                            </span>
+                        </motion.button>
+                    ))
+
+
+                );
+            case "autoservices":
+                return (
+                    transportServices.map((service) => (
+                        <div
+
+                            className="flex flex-col items-center gap group"
+                        >
+                            {/* CIRCLE IMAGE */}
+
+                            <img
+                                src={service.image}
+                                alt={service.name}
+                                className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
+                            />
+
+
+                            {/* NAME */}
+                            <span className="text-xs sm:text-sm font-medium text-gray-800 text-center">
+                                {service.name}
+                            </span>
+                        </div>
+                    ))
+                );
+            case "turf":
+                return null
+        }
+    }
 
 
     return (
@@ -62,45 +120,22 @@ const Searchexplore = ({ service }: { service: string }) => {
             </div>
 
             {/* TITLE */}
-            {
-                service == "fooddelivery" && <>
 
 
-                    <div className="px-4 md:px-10 lg:px-20 pb-4">
-                        <div
-                            className="
+
+            <div className="px-4 md:px-10 lg:px-20 pb-4">
+                <div
+                    className="
         flex gap-4
         overflow-x-auto scrollbar-hide
         md:flex-wrap md:justify-start
       "
-                        >
-                            {favouriteDishes.map((dish) => (
-                                <motion.button
-                                    whileTap={{ scale: 0.94 }}
-                                    key={dish.id}
-                                    className="min-w-[86px]  flex flex-col items-center gap-2"
-                                >
-                                    {/* Image */}
-                                    <div
+                >
+                    <FunctionSwitch />
+                </div>
+            </div>
 
-                                    >
-                                        <img
-                                            src={dish.image}
-                                            alt={dish.name}
-                                            className="w-14 h-14 object-cover rounded-full"
-                                        />
-                                    </div>
 
-                                    {/* Label */}
-                                    <span className="text-xs font-semibold text-gray-800 text-center">
-                                        {dish.name}
-                                    </span>
-                                </motion.button>
-                            ))}
-                        </div>
-                    </div>
-                </>
-            }
         </motion.div>
 
 

@@ -1,3 +1,6 @@
+import Link from "next/link"
+
+
 type ServiceCardProps = {
     icon: string
     title: string
@@ -15,7 +18,9 @@ const ServiceCard = ({
     iconBg,
 }: ServiceCardProps) => {
     return (
-        <div
+        <Link
+            href={`/services/${action}`
+            }
             className="
     flex sm:flex-col lg:flex-row items-center justify-between
     rounded-2xl bg-white p-4
@@ -56,7 +61,7 @@ const ServiceCard = ({
             >
                 {action}
             </button>
-        </div>
+        </Link>
 
     )
 }
