@@ -1,11 +1,12 @@
 import { CardProps } from "../components/cards/CardScrollable";
 export interface CarServiceItem {
     _id: string;
+    category?: string
     type: "taxi" | "rental" | "dailyrental";
     name: string;
     images: {
         url: string;
-        public_id: string
+        public_id?: string
     };
     driverName?: string; // only taxi
     rating: number;
@@ -420,13 +421,14 @@ export const favouriteDishes = [
 
 // app/libs/Datas.ts
 
-export const carServices = [
+export const carServices: CarServiceItem[] = [
     {
         _id: "1",
         type: "taxi",
         name: "Suhail Taxi Service",
         images: {
-            url: "https://images.unsplash.com/photo-1549924231-f129b911e442"
+            url: "https://images.unsplash.com/photo-1549924231-f129b911e442",
+            public_id: ""
         },
         driverName: "Rahul",
         rating: 4.6,
@@ -445,7 +447,8 @@ export const carServices = [
         type: "rental",
         name: "Zoom Car Rentals",
         images: {
-            url: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d"
+            url: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d",
+
         },
         rating: 4.3,
         price: "₹2,499/day",
