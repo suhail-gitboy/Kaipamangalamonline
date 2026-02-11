@@ -5,6 +5,7 @@ import { TurfItem } from "@/app/libs/Datas";
 export default function TurfCard({ item }: { item: TurfItem }) {
     return (
         <Link
+            key={item._id}
             href={`/viewservice/turf/${item._id}`}
             className="max-w-2xl w-full bg-white border rounded-2xl p-4 flex gap-4 hover:shadow-lg transition"
         >

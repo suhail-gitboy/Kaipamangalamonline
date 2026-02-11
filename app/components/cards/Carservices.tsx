@@ -3,8 +3,9 @@ import { Star, PhoneCall, Car } from "lucide-react";
 import { CarServiceItem, carServices } from "@/app/libs/Datas";
 
 export default function CarServiceCard({ item }: { item: CarServiceItem }) {
+    const id: number = 12134
     return (
-        <Link href={`/viewservice/autoservices`} className="max-w-2xl w-full bg-white border rounded-2xl p-4 flex gap-4 hover:shadow-lg transition">
+        <Link key={item._id} href={`/viewservice/autoservices/${id}`} className="max-w-2xl w-full bg-white border rounded-2xl p-4 flex gap-4 hover:shadow-lg transition">
 
             {/* LEFT IMAGE */}
             <div className="relative w-40 h-28 shrink-0">

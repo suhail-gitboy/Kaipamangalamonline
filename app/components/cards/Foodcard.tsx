@@ -20,11 +20,12 @@ export interface Items {
 }
 
 export default function RestaurantList({ item }: { item: Items }) {
+    const id: number = 12134
     return (
 
 
         <Link
-            href={`/viewservice/fooddelivery`}
+            href={`/viewservice/fooddelivery/${id}`}
             key={item._id}
             className="max-w-2xl w-full bg-white border rounded-2xl p-4 flex justify-between gap-4 hover:shadow-lg transition"
         >

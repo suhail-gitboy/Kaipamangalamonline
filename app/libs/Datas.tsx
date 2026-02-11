@@ -371,19 +371,19 @@ export const favouriteDishes = [
     {
         id: "dish_01",
         name: "Alfaham",
-        image: "https://images.unsplash.com/photo-1628294896516-344152572ee3",
+        image: "/food/aflu.webp",
         color: "bg-red-100",
     },
     {
         id: "dish_02",
         name: "Shawarma",
-        image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec",
+        image: "/food/f32b47ab-a2b4-4dff-8615-3c612f62e8ae.jpg",
         color: "bg-orange-100",
     },
     {
         id: "dish_03",
         name: "Kappa & Combos",
-        image: "https://images.unsplash.com/photo-1626776877084-07b1e0edb7c1",
+        image: "/food/kaappa.jpg",
         color: "bg-yellow-100",
     },
     {
@@ -393,17 +393,18 @@ export const favouriteDishes = [
         color: "bg-amber-100",
     },
     {
-        id: "dish_05",
-        name: "Fried Rice",
-        image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
-        color: "bg-green-100",
-    },
-    {
         id: "dish_06",
-        name: "Biriyani",
-        image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0",
+        name: "masala dosha",
+        image: "/food/masaladosha.webp",
         color: "bg-lime-100",
     },
+    {
+        id: "dish_05",
+        name: "Fried Rice",
+        image: "/food/friedrice.png",
+        color: "bg-green-100",
+    },
+
     {
         id: "dish_07",
         name: "Shakes",

@@ -6,6 +6,7 @@ import Searchexplore from './ui/SEarch'
 import { motion } from 'framer-motion'
 import CarServiceCard from '@/app/components/cards/Carservices'
 import TurfCard from '@/app/components/cards/Turf'
+import Link from 'next/link'
 
 
 type pArams = {
@@ -25,7 +26,9 @@ const page = async ({ params }: pArams) => {
             case "fooddelivery": return (
                 <div className="space-y-2">
                     {restaurants.map((data, key) => (
-                        <RestaurantList item={data} key={key} />
+
+                        <RestaurantList item={data} />
+
                     ))}
                 </div>
             )
@@ -33,7 +36,9 @@ const page = async ({ params }: pArams) => {
             case "autoservices": return (
                 <div className="space-y-2">
                     {carServices.map((data, key) => (
-                        <CarServiceCard item={data} key={key} />
+
+                        <CarServiceCard item={data} />
+
                     ))}
                 </div>
             )
@@ -41,7 +46,9 @@ const page = async ({ params }: pArams) => {
             case "turf": return (
                 <div className="space-y-2">
                     {turfs.map((data, key) => (
-                        <TurfCard item={data} key={key} />
+
+                        <TurfCard item={data} />
+
                     ))}
                 </div>
             )
