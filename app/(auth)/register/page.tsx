@@ -1,8 +1,11 @@
 "use client"
-import { RegisterSchema } from "@/app/libs/Validation"
+import { useRegisterUser } from "@/app/APISERVICES/allServices"
+import { RegisterSchema } from "@/libs/Validation"
 import { Formik } from "formik"
+import { signIn } from "next-auth/react"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { FaGoogle, FaApple } from "react-icons/fa"
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi"
@@ -10,6 +13,27 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi"
 export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+    const { data, mutate: registerUser, isPending, error } = useRegisterUser()
+    const route = useRouter()
+    const Handlesubmit = (values) => {
+        registerUser(values, {
+            onSuccess: async () => {
+                console.log(data);
+
+                alert("Registered Successfully")
+                route.push("/")
+
+
+
+            },
+
+            onError: (err) => {
+                alert(err.message || "Registration failed")
+            },
+        })
+    }
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -59,9 +83,7 @@ export default function RegisterPage() {
                             confirmPassword: "",
                         }}
                         validationSchema={RegisterSchema}
-                        onSubmit={(values) => {
-                            console.log(values)
-                        }}
+                        onSubmit={Handlesubmit}
                     >
                         {({
                             values,
@@ -171,10 +193,11 @@ export default function RegisterPage() {
 
                                 {/* Register button */}
                                 <button
+                                    disabled={isPending}
                                     type="submit"
                                     className="w-full bg-gradient-to-r from-lime-400 to-lime-600 text-white py-2.5 rounded-lg font-medium hover:opacity-90 transition"
                                 >
-                                    Create Account
+                                    {isPending ? "signing-in" : "Create Account"}
                                 </button>
 
                                 {/* Already registered */}

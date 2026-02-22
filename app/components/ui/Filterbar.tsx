@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Close from '../rusable/Close';
-import { Filterdata } from '@/app/libs/Datas';
+
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
+import { Filterdata } from '@/libs/Datas';
 
 const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Dispatch<React.SetStateAction<boolean>> }) => {
 

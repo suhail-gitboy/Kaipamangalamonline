@@ -1,9 +1,19 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { VscSettings } from "react-icons/vsc";
 import { BsBell } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Image from 'next/image';
+import {
+    User,
+    Bell,
+    Users,
+    Settings,
+    LogOut,
+    Sparkles,
+} from "lucide-react"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,9 +24,24 @@ import {
     DropdownMenuTrigger,
 } from "../../../shadcn/ui/dropdown-menu"
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import { useStore } from '@/app/zustandstate/Store';
 
 
 const Nav = () => {
+    const { data: session } = useSession()
+
+
+
+    const setUser = useStore((s) => s.Setuser)
+    const userdata = useStore((s) => s.userdata)
+    useEffect(() => {
+        if (session?.user == null) return
+        setUser(session?.user)
+
+    }, [session])
+
+
     return (
         <nav className='pt-4  pb-2'>
             <div className='flex justify-between items-center'>
@@ -33,42 +58,104 @@ const Nav = () => {
                 <div className='flex items-center space-x-3 justify-between'>
                     <div className='flex '>
 
-                        <button className='p-2 md:p-3 hover:bg-neutral-200 hover:text-black transition-colors duration-150 cursor-pointer bg-white   rounded-full mr-2'><VscSettings className='text-muted text-xl md:text-2xl' /></button>
+
                         <button className='p-2 md:p-3 bg-white hover:bg-neutral-200 hover:text-black transition-colors duration-150 cursor-pointer rounded-full'><BsBell className='text-muted text-xl md:text-2xl' /></button>
 
 
                     </div>
 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <button className='bg-white hover:text-black transition-colors duration-150 cursor-pointer flex space-x-2 items-center p-2 md:p-3 rounded-xl'>
-                                <RxHamburgerMenu className='text-xl md:text-2xl' />
-                                <Image
-                                    src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/man-user-color-icon.svg"
-                                    width={24} height={24}
-                                    className="  rounded-full"
-                                    alt="User avatar"
-                                />
+                    {
+                        userdata == null ? <Link href={"/login"} className='bg-white text-muted rounded-xl md:px-5 px-3 md:py-3 py-2 text-sm'>login</Link> :
+                            <DropdownMenu>
+                                {/* Trigger Button */}
+                                <DropdownMenuTrigger asChild>
+                                    <button className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/80 backdrop-blur border shadow-sm hover:shadow-md transition-all">
+                                        <Image
+                                            src={
+                                                userdata?.image ? userdata?.image : userdata.avatar ||
+                                                    "https://ui-avatars.com/api/?name=User"
+                                            }
+                                            width={32}
+                                            height={32}
+                                            className="rounded-full"
+                                            alt="avatar"
+                                        />
+                                        <span className="text-sm font-medium hidden md:block">
+                                            {userdata?.name || "User"}
+                                        </span>
+                                    </button>
+                                </DropdownMenuTrigger>
 
+                                {/* Dropdown Content */}
+                                <DropdownMenuContent className="w-64 p-2 rounded-2xl shadow-xl border bg-white/95 backdrop-blur animate-in fade-in zoom-in-95">
 
+                                    {/* USER HEADER */}
+                                    <div className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-lime-100 to-emerald-100 mb-2">
+                                        <Image
+                                            src={
+                                                userdata?.image ? userdata.image : userdata.avatar ||
+                                                    "https://ui-avatars.com/api/?name=User"
+                                            }
+                                            width={40}
+                                            height={40}
+                                            className="rounded-full border"
+                                            alt="avatar"
+                                        />
+                                        <div>
+                                            <p className="font-semibold text-sm">
+                                                {userdata?.name || "User"}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {userdata?.email}
+                                            </p>
+                                        </div>
+                                    </div>
 
+                                    <DropdownMenuSeparator />
 
-                            </button>
+                                    {/* ACCOUNT */}
+                                    <DropdownMenuGroup>
+                                        <DropdownMenuLabel className="text-xs text-gray-400 px-2">
+                                            My Account
+                                        </DropdownMenuLabel>
 
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuGroup>
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuItem asChild><Link href={"/profile"}> Profile </Link></DropdownMenuItem>
-                                <DropdownMenuItem> <Link href={"/explore"}> Notifications </Link> </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            <DropdownMenuGroup>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem><Link href={"/search"}> Team</Link></DropdownMenuItem>
-                                <DropdownMenuItem><Link href={"/search"}> Notifications </Link></DropdownMenuItem>
-                            </DropdownMenuGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                        <DropdownMenuItem asChild>
+                                            <Link href="/profile" className="flex items-center gap-2">
+                                                <User size={16} /> Profile
+                                            </Link>
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuItem asChild>
+                                            <Link href="/explore" className="flex items-center gap-2">
+                                                <Bell size={16} /> Notifications
+                                            </Link>
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuItem asChild>
+                                            <Link href="/team" className="flex items-center gap-2">
+                                                <Users size={16} /> Team
+                                            </Link>
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuItem asChild>
+                                            <Link href="/settings" className="flex items-center gap-2">
+                                                <Settings size={16} /> Settings
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuGroup>
+
+                                    <DropdownMenuSeparator />
+
+                                    {/* LOGOUT */}
+                                    <DropdownMenuItem
+                                        onClick={() => signOut()}
+                                        className="flex items-center gap-2 text-red-500 focus:text-red-600"
+                                    >
+                                        <LogOut size={16} /> Logout
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                    }
 
 
                 </div>

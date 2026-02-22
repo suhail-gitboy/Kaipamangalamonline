@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Star, PhoneCall, Car } from "lucide-react";
-import { CarServiceItem, carServices } from "@/app/libs/Datas";
+import { CarServiceItem, carServices } from "../../../libs/Datas";
 
 export default function CarServiceCard({ item }: { item: CarServiceItem }) {
     const id: number = 12134

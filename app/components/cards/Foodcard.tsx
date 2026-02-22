@@ -1,4 +1,5 @@
-import { restaurants } from "@/app/libs/Datas";
+
+import { restaurants } from "@/libs/Datas";
 import { Star, Sparkles, MoreVertical } from "lucide-react";
 import Link from "next/link";
 export interface Items {

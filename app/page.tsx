@@ -2,15 +2,15 @@ import Image from "next/image";
 import Nav from "./components/layout/Nav";
 import Header from "./components/layout/Header";
 import Promotion from "./components/layout/Promotion";
-import { areaServices } from "./libs/Datas";
+import { areaServices } from "@/libs/Datas";
 import ServiceCard from "./components/cards/Cardmain";
 import Link from "next/link";
 import Button from "./components/ui/Buttton";
 import Adddetailbutton from "./components/ui/Adddetailbutton";
 import Barbottom from "./components/layout/Barbottom";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-
 
 
 

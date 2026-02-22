@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Star, Clock } from "lucide-react";
-import { TurfItem } from "@/app/libs/Datas";
+import { TurfItem } from "../../../libs/Datas";
 
 export default function TurfCard({ item }: { item: TurfItem }) {
     return (

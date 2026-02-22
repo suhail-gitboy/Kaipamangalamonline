@@ -7,9 +7,9 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "../../../shadcn/ui/carousel"
-
-import { items } from "@/app/libs/Datas"
+items
 import Image from "next/image"
+import { items } from "@/libs/Datas"
 
 export function CarouselSize() {
 

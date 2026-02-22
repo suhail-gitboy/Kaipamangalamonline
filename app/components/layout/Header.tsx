@@ -7,7 +7,7 @@ import Link from "next/link";
 import ImageCarousel from "../ui/Carousal";
 import ServiceCard from "../cards/Cardmain";
 import LocalNewsCard from "../ui/Hookuser";
-import { areaServices } from "@/app/libs/Datas";
+import { areaServices } from "@/libs/Datas";
 
 const Header = () => {
     const router = useRouter();

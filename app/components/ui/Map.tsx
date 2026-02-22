@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { carServices, mapPPath, turfs } from "@/app/libs/Datas";
+import { carServices, mapPPath, turfs } from "../../../libs/Datas";
 
 const foodIcon = new L.Icon({
     iconUrl: "/icons/chicken-leg.png",

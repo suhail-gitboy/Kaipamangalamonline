@@ -4,11 +4,46 @@ import { useState } from "react"
 import { FaGoogle, FaApple } from "react-icons/fa"
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi"
 import { Formik } from "formik"
-import { LoginSchema } from "@/app/libs/Validation"
+import { LoginSchema } from "@/libs/Validation"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
+LoginSchema
 export default function LoginPage() {
-
+    const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, Setloading] = useState(false)
+    const Submitfunction = async (values) => {
+        Setloading(true)
+        const res = await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+        });
+
+        if (res?.ok) {
+            Setloading(false)
+            alert("Login Success");
+            router.push("/");
+        } else {
+            Setloading(false)
+            alert("Invalid email or password");
+        }
+    }
+
+    const GoogleLogin = async () => {
+        const Res = await signIn("google", {
+            callbackUrl: "/",
+        })
+    }
+
+
+    const Facebooklogin = async () => {
+        const res = await signIn("facebook", {
+            callbackUrl: "/"
+        })
+    }
+
 
     return (
         <div className="min-h-screen  flex items-center justify-center bg-gray-100">
@@ -32,17 +67,65 @@ export default function LoginPage() {
                     </p>
 
                     {/* Social login */}
-                    <div className="flex gap-4 mb-4">
-                        <button className="flex-1 border rounded-lg py-2 text-sm flex items-center justify-center gap-2 hover:bg-gray-50">
-                            <FaGoogle className="text-red-500" />
-                            Sign in with Google
+                    <div className="flex flex-col sm:flex-row gap-3 mb-6">
+
+                        {/* GOOGLE */}
+                        <button
+                            onClick={GoogleLogin}
+                            className="
+      flex items-center justify-center gap-3
+      w-full
+      bg-white
+      border border-gray-300
+      text-gray-700
+      font-medium
+      py-2.5
+      rounded-xl
+      text-sm
+      shadow-sm
+      hover:bg-gray-50
+      active:scale-[0.98]
+      transition
+    "
+                        >
+                            <img
+                                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                                className="w-5 h-5"
+                                alt="google"
+                            />
+                            Continue with Google
                         </button>
 
-                        <button className="flex-1 border rounded-lg py-2 text-sm flex items-center justify-center gap-2 hover:bg-gray-50">
-                            <FaApple className="text-black" />
-                            Sign in with Apple
+
+                        {/* FACEBOOK */}
+                        <button
+                            onClick={Facebooklogin}
+
+                            className="
+      flex items-center justify-center gap-3
+      w-full
+      bg-[#ffffff]
+      text-black
+      text-sm
+      font-medium
+      py-2.5
+      rounded-xl
+      shadow-sm
+      hover:bg-[#166FE5]
+      active:scale-[0.98]
+      transition
+    "
+                        >
+                            <img
+                                src="/communication.png"
+                                className="w-5 h-5"
+                                alt="facebook"
+                            />
+                            Continue with Facebook
                         </button>
+
                     </div>
+
 
                     <div className="text-center text-gray-400 text-sm my-4">
                         OR
@@ -52,9 +135,7 @@ export default function LoginPage() {
                     <Formik
                         initialValues={{ email: "", password: "" }}
                         validationSchema={LoginSchema}
-                        onSubmit={(values) => {
-                            console.log(values) // API call here
-                        }}
+                        onSubmit={Submitfunction}
                     >
                         {({
                             values,
@@ -125,7 +206,7 @@ export default function LoginPage() {
                                     type="submit"
                                     className="w-full bg-gradient-to-r from-lime-400 to-lime-600 text-white py-3 rounded-lg font-medium hover:opacity-90 transition"
                                 >
-                                    Login
+                                    {loading ? "loggin-in" : "login in"}
                                 </button>
                             </form>
                         )}
@@ -143,9 +224,9 @@ export default function LoginPage() {
                 {/* RIGHT SIDE – IMAGE / PREVIEW */}
                 <div className="hidden md:flex w-1/2 bg-gray-50 p-6  items-center justify-center">
                     {/* Replace this with your image */}
-                    <div className="w-full h-full rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
-                        Dashboard Preview Image
-                    </div>
+                    <img src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/f5/8d/7c/caption.jpg?w=1200&h=-1&s=1"} className="w-full h-full rounded-xl bg-gray-200 flex items-center justify-center text-gray-500" />
+
+
                 </div>
 
             </div>
