@@ -8,12 +8,20 @@ import { LoginSchema } from "@/libs/Validation"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
-LoginSchema
+export interface Login {
+    email: string,
+    password: string,
+    name?: string,
+    confirmPassword?: string
+}
 export default function LoginPage() {
+
+
+
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
     const [loading, Setloading] = useState(false)
-    const Submitfunction = async (values) => {
+    const Submitfunction = async (values: Login) => {
         Setloading(true)
         const res = await signIn("credentials", {
             email: values.email,
@@ -50,10 +58,10 @@ export default function LoginPage() {
             {/* Card */}
             <div className="mx-5 md:flex w-[1100px] h-auto bg-white rounded-2xl shadow-lg overflow-hidden">
 
-                {/* LEFT SIDE – LOGIN FORM */}
+
                 <div className="w-full md:w-1/2 p-12 flex flex-col justify-center">
 
-                    {/* Logo */}
+
                     <div className="flex items-center gap-2 mb-8">
                         <div className="w-8 h-8 rounded-full bg-lime-400"></div>
                         <span className="font-semibold text-lg">KaipaOnline</span>
@@ -66,10 +74,10 @@ export default function LoginPage() {
                         Fill the below form to login
                     </p>
 
-                    {/* Social login */}
+
                     <div className="flex flex-col sm:flex-row gap-3 mb-6">
 
-                        {/* GOOGLE */}
+
                         <button
                             onClick={GoogleLogin}
                             className="
@@ -97,7 +105,6 @@ export default function LoginPage() {
                         </button>
 
 
-                        {/* FACEBOOK */}
                         <button
                             onClick={Facebooklogin}
 
@@ -147,7 +154,6 @@ export default function LoginPage() {
                         }) => (
                             <form onSubmit={handleSubmit}>
 
-                                {/* Email */}
                                 <div className="mb-4">
                                     <label className="text-sm text-gray-600">Email</label>
                                     <input
@@ -168,7 +174,7 @@ export default function LoginPage() {
                                     )}
                                 </div>
 
-                                {/* Password */}
+
                                 <div className="mb-2 relative">
                                     <label className="text-sm text-gray-600">Password</label>
 
@@ -185,7 +191,7 @@ export default function LoginPage() {
                                                 : "focus:ring-lime-400"}`}
                                     />
 
-                                    {/* Show / Hide icon */}
+
                                     <span
                                         className="absolute right-3 top-9 cursor-pointer text-gray-500"
                                         onClick={() => setShowPassword(!showPassword)}

@@ -20,7 +20,8 @@ export async function POST(req: NextRequest) {
         await Connectdb()
 
 
-        const get_id = await User.findOne({ email: user }).select("_id")
+
+
         const formData: PostType | any = await req.formData()
         const datas = Object.fromEntries(formData.entries())
 
@@ -28,7 +29,8 @@ export async function POST(req: NextRequest) {
 
         if (!imagefile || typeof imagefile == "string"
         ) throw new Error("image missing")
-        const { title, category, mobilenumber, location, price, fixture, } = datas
+        const { title, category, mobilenumber, pin, location, price, fixture, description } = datas
+
 
 
         const arrayBuffer = await imagefile.arrayBuffer()
@@ -60,17 +62,19 @@ export async function POST(req: NextRequest) {
         Newpost.image = image
         Newpost.category = category
         Newpost.mobilenumber = Number(mobilenumber)
-        Newpost.userid = get_id
+        Newpost.usermail = user
+        Newpost.description = description
 
-        if (category !== Categoryenum.NEWS) {
+        if (category !== Categoryenum.NEWS.toLocaleLowerCase()) {
             Newpost.location = location
+            Newpost.address = JSON.parse(pin)
         }
 
-        if (category === Categoryenum.REALESTATE) {
+        if (category === Categoryenum.REALESTATE.toLocaleLowerCase()) {
             Newpost.price = price
         }
-        if (category == Categoryenum.EVENTS || category == Categoryenum.TOURNAMENTS) {
-            Newpost.fixture = fixture
+        if (category == Categoryenum.EVENTS.toLocaleLowerCase() || category.toLocaleLowerCase() == Categoryenum.TOURNAMENTS.toLocaleLowerCase() || category == Categoryenum.OFFERS.toLocaleLowerCase()) {
+            Newpost.fixture = JSON.parse(fixture)
         }
 
 

@@ -15,6 +15,8 @@ const ProviderWrapper = ({ children }: { children: React.ReactNode }) => {
 
 
                 <SessionProvider>
+
+
                     {
                         children
                     }

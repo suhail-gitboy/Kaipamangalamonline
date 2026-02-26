@@ -10,13 +10,19 @@ import { useState } from "react"
 import { FaGoogle, FaApple } from "react-icons/fa"
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi"
 
+export interface Sign {
+    email: string,
+    password: string,
+    name: string,
+    confirmPassword: string
+}
 export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const { data, mutate: registerUser, isPending, error } = useRegisterUser()
     const route = useRouter()
-    const Handlesubmit = (values) => {
+    const Handlesubmit = (values: Sign) => {
         registerUser(values, {
             onSuccess: async () => {
                 console.log(data);

@@ -4,14 +4,17 @@ import Close from '../rusable/Close';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import { Filterdata } from '@/libs/Datas';
+import { useRouter } from 'next/navigation';
 
 const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
-
+    const router = useRouter()
 
 
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
+
+
 
     const locations = [
         "Koorikuzhi",
@@ -25,12 +28,30 @@ const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Di
         "Pallivalavu"
     ];
 
+
+
+
     const categories = Filterdata.filter(a => a.filter).map(a => a.activity);
     const handlers = useSwipeable({
         onSwipedDown: () => Setfilter(false),
         preventScrollOnSwipe: true,
         trackTouch: true
     })
+
+
+    const Apllyfilter = () => {
+        if (!selectedLocation || !selectedCategory) {
+            alert("select location or category")
+            return
+        }
+
+        const spacecleared = selectedCategory.replace(/\s+/g, "")
+
+        router.push(`/explore?category=${spacecleared}&location=${selectedLocation}`)
+        Setfilter(prev => !prev)
+
+
+    }
     return (
         <motion.div initial={{ opacity: 0, y: 1000 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,9 +75,9 @@ const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Di
                         {locations.map((loc) => (
                             <button
                                 key={loc}
-                                onClick={() => setSelectedLocation(loc)}
+                                onClick={() => setSelectedLocation(loc.toLowerCase())}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm
-                ${selectedLocation === loc
+                ${selectedLocation === loc.toLowerCase()
                                         ? "bg-white text-orange-600 shadow-md"
                                         : "bg-white/80 text-gray-700 hover:bg-white/95 hover:shadow-md"
                                     }`}
@@ -74,7 +95,7 @@ const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Di
                         {categories.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setSelectedCategory(cat)}
+                                onClick={() => setSelectedCategory(cat.toLowerCase())}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm
                 ${selectedCategory === cat
                                         ? "bg-white text-orange-600 shadow-md"
@@ -97,7 +118,7 @@ const Filterbar = ({ Setfilter, filter }: { filter: boolean, Setfilter: React.Di
                 {/* Apply Button */}
                 <button
                     className="w-full bg-lime-100 text-lime-800 font-semibold py-2 rounded-lg shadow hover:bg-lime-200 transition"
-                    onClick={() => console.log({ location: selectedLocation, category: selectedCategory })}
+                    onClick={() => Apllyfilter()}
                 >
                     Apply Filters
                 </button>

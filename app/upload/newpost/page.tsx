@@ -5,6 +5,11 @@ import Redirect from "@/app/components/rusable/Redirect"
 import Loaderone from "@/app/components/ui/Loaderone"
 import { Categoryenum } from "@/app/types"
 import { useStore } from "@/app/zustandstate/Store"
+import { Calendar } from "@/shadcn/ui/calendar"
+import { Button } from "@/shadcn/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover"
+
+import { format } from "date-fns"
 import {
     ImageIcon,
     MapPin,
@@ -16,8 +21,9 @@ import {
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { HandledEvents } from "react-swipeable/es/types"
+import LocationPicker from "@/app/(pages)/manageservice/uicard/Mappicker"
 
 const Page = () => {
     const { setPostField, postData } = useStore()
@@ -31,6 +37,21 @@ const Page = () => {
     const [image, Setimage] = useState<File | null>(null)
     const [imagep, Setimagep] = useState(null)
     const [loading, Setloading] = useState(false)
+    const [pin, Setpinpoint] = useState({
+        lat: "",
+        lan: ""
+    })
+    const [adress, Setadress] = useState("")
+
+    useEffect(() => {
+        console.log(pin);
+    }, [pin])
+
+
+    const [fixture, setFixture] = useState<{
+        from?: Date
+        to?: Date
+    }>({})
 
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,11 +69,10 @@ const Page = () => {
     }
 
 
-    const { mutate: postdata, isPending, isSuccess } = usePostdata()
 
     const Postnewpost = async () => {
         const { title, description, location } = postData
-        if (!title || !description || !location || !image) {
+        if (!title || !description || !imagep) {
             alert("Please fill all fields & upload image")
             return
         }
@@ -64,9 +84,12 @@ const Page = () => {
         formData.append("category", postData.category)
         formData.append("mobilenumber", postData.mobilenumber)
         formData.append("location", postData.location)
-
+        formData.append("pin", JSON.stringify({ ...pin, adress }))
+        if (isEvent) {
+            formData.append("fixture", JSON.stringify(fixture))
+        }
         if (isRealEstate) formData.append("price", postData.price)
-        if (isEvent) formData.append("fixture", postData.fixture)
+
 
         formData.append("image", image)
 
@@ -204,7 +227,9 @@ const Page = () => {
                                 className="w-full border rounded-xl p-3 pl-10"
                             >
                                 {Object.values(Categoryenum).map((cat) => (
-                                    <option key={cat}>{cat}</option>
+                                    <option key={cat} value={cat}>
+                                        {cat}
+                                    </option>
                                 ))}
                             </select>
                         </div>
@@ -221,7 +246,7 @@ const Page = () => {
                     </div>
 
 
-                    {postData.category !== Categoryenum.NEWS && (
+                    {postData.category !== Categoryenum.NEWS && (<>
                         <div className="relative">
                             <MapPin className="absolute left-3 top-3 text-gray-400" size={18} />
                             <input
@@ -231,6 +256,17 @@ const Page = () => {
                                 className="w-full border rounded-xl p-3 pl-10"
                             />
                         </div>
+                        <div>
+                            <label className="text-sm font-medium mb-2 block">
+                                Select exact  Location
+                            </label>
+
+                            <div className="rounded-2xl overflow-hidden border">
+                                <LocationPicker Setadress={Setadress} Setpinpoint={Setpinpoint} />
+                            </div>
+                        </div>
+                    </>
+
                     )}
 
 
@@ -248,14 +284,42 @@ const Page = () => {
 
 
                     {isEvent && (
-                        <div className="relative">
-                            <CalendarDays className="absolute left-3 top-3 text-gray-400" size={18} />
-                            <input
-                                value={postData.fixture}
-                                onChange={(e) => setPostField("fixture", e.target.value)}
-                                placeholder="Event Date / Fixture"
-                                className="w-full border rounded-xl p-3 pl-10"
-                            />
+                        <div className="w-full">
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full justify-start text-left font-normal"
+                                    >
+                                        <CalendarDays className="mr-2 h-4 w-4" />
+
+                                        {fixture.from ? (
+                                            fixture.to ? (
+                                                <>
+                                                    {format(fixture.from, "PPP")} -{" "}
+                                                    {format(fixture.to, "PPP")}
+                                                </>
+                                            ) : (
+                                                format(fixture.from, "PPP")
+                                            )
+                                        ) : (
+                                            "Select Fixture Date Range"
+                                        )}
+                                    </Button>
+                                </PopoverTrigger>
+
+                                <PopoverContent className="w-auto p-0">
+                                    <Calendar
+                                        mode="range"
+                                        selected={fixture}
+                                        onSelect={(range) => {
+                                            if (!range) return
+                                            setFixture(range)
+                                        }}
+                                        numberOfMonths={2}
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </div>
                     )}
 

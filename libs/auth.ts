@@ -64,6 +64,29 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
+        async signIn({ user, account }) {
+            await Connectdb();
+
+
+            if (account?.provider === "google" || account?.provider === "facebook") {
+
+                const existingUser = await User.findOne({ email: user.email });
+
+                if (!existingUser) {
+                    await User.create({
+                        name: user.name,
+                        email: user.email,
+                        avatar: user.image,
+                        provider: account.provider,
+                        password: null,
+                    });
+                }
+            }
+
+            return true;
+        },
+
+
         async jwt({ token, user }) {
 
             if (user) {
@@ -84,6 +107,7 @@ export const authOptions: NextAuthOptions = {
             }
             return session
         },
+
     },
 
     pages: {

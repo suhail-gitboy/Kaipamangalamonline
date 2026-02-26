@@ -18,6 +18,9 @@ import { AnimatePresence, motion } from "framer-motion";
 const Searchexplore = () => {
 
     const [showNavbar, setShowNavbar] = useState(true);
+    const [category, setcategory] = useState("");
+    const [location, setlocation] = useState("");
+    const [search, setsearch] = useState("");
     const lastScrollY = useRef(0);
 
     useEffect(() => {
@@ -43,31 +46,47 @@ const Searchexplore = () => {
         filter?: string
     }
     const Activity: Activity[] = [
-        { activity: "chai spot", icon: "/icons/tea.png", filter: "chai" },
-        {
-            activity: "food delivery",
-            icon: "/icons/delivery-bike.png",
-            action: "fooddelivery"
-        },
-        {
-            activity: "auto service", icon: "/icons/taxi.png",
-            action: "autoservices"
-        },
-        {
-            activity: "book turf", icon: "/football.png",
-            action: "turf"
-        },
+        { activity: "all", icon: "", filter: "all" },
+        { activity: "chaispot", icon: "/icons/tea.png", filter: "chaispot" },
+        // {
+        //     activity: "food delivery",
+        //     icon: "/icons/delivery-bike.png",
+        //     action: "fooddelivery"
+        // },
+        // {
+        //     activity: "auto service", icon: "/icons/taxi.png",
+        //     action: "autoservices"
+        // },
+        // {
+        //     activity: "book turf", icon: "/football.png",
+        //     action: "turf"
+        // },
         { activity: "news", icon: "/icons/news-report.png", filter: "news" },
 
-        { activity: "Fashion", icon: "/icons/clothes-hanger.png", filter: "fashion" },
-        { activity: "tournaments", icon: "/icons/cricket.png", filter: "tournament" },
+        { activity: "fashion", icon: "/icons/clothes-hanger.png", filter: "cloths" },
+        { activity: "tournaments", icon: "/icons/cricket.png", filter: "tournaments" },
 
-        { activity: "real estate", icon: "/icons/search.png", filter: "sale" },
-        { activity: "Fest", icon: "/icons/celebration.png", filter: "fest" },
+        { activity: "realestate", icon: "/icons/search.png", filter: "realestate" },
+        { activity: "event", icon: "/icons/celebration.png", filter: "fest" },
         { activity: "catering", icon: "/icons/catering.png", filter: "catering" },
     ];
 
+    const functionFilter = (type: string | any) => {
+        if (type == "all") {
+            router.push("/explore")
+            return
 
+        }
+
+        router.push(`/explore?category=${type}`)
+
+    }
+
+    const FunctionSearchby = () => {
+        if (search.length > 2) {
+            router.push(`/explore?searchby=${search}`)
+        }
+    }
 
     const [filter, Setfilter] = useState<boolean>(false)
     return (
@@ -85,8 +104,8 @@ const Searchexplore = () => {
 
                     <div className='w-full md:w-2/4 flex  rounded-4xl  px-4 py-3 md:py-3  items-center bg-neutral-100'>
                         <CiSearch className='text-muted text-2xl' />
-                        <input type="text" placeholder='search by shop,type' className='  px-2 w-full outline-0 underline-0 rounded-full text-muted text-md ' />
-                        <IoMdClose />
+                        <input value={search} onChange={(e) => { FunctionSearchby(); setsearch(e.target.value) }} type="text" placeholder='search by shop,type' className='  px-2 w-full outline-0 underline-0 rounded-full text-muted text-md ' />
+                        <IoMdClose onClick={() => setsearch("")} />
                     </div>
                     <button onClick={() => Setfilter(prev => !prev)} className='bg-bg text-muted p-3 rounded-full'><VscSettings className='text-2xl text-muted ' /></button>
 
@@ -108,11 +127,7 @@ const Searchexplore = () => {
                         {Activity.map((data, ind) => (
                             <button
                                 key={ind}
-                                onClick={() => {
-                                    if (data.action) {
-                                        router.push(`/services/${data.action}`)
-                                    }
-                                }}
+                                onClick={() => functionFilter(data?.filter)}
                                 className={`
           group
           flex items-center gap-2
@@ -132,17 +147,19 @@ const Searchexplore = () => {
           flex-shrink-0
         `}
                             >
-                                <Image
-                                    src={data.icon}
-                                    width={22}
-                                    height={22}
-                                    alt="icon"
-                                    className="
+                                {
+                                    data.filter !== "all" && <Image
+                                        src={data.icon}
+                                        width={22}
+                                        height={22}
+                                        alt="icon"
+                                        className="
             shrink-0
             group-hover:scale-110
             transition
           "
-                                />
+                                    />
+                                }
 
                                 <span>{data.activity}</span>
                             </button>

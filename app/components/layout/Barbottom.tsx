@@ -21,7 +21,7 @@ const Barbottom = () => {
             icon: IoMdHeartEmpty,
         },
         {
-            href: "/newpost",
+            href: "/upload/newpost",
             label: "Add",
             icon: IoAdd,
             isCenter: true,
@@ -41,7 +41,7 @@ const Barbottom = () => {
     return (
         <div
             className="
-        fixed z-40 bottom-0 left-0 right-0 
+        fixed z-20 bottom-0 left-0 right-0 
         bg-white border-t border-slate-200
         px-2 py-2
         md:hidden

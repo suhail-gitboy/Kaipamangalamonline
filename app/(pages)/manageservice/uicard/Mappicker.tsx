@@ -12,18 +12,22 @@ const houseIcon = new L.Icon({
     iconSize: [36, 36],
     iconAnchor: [18, 36],
 })
+interface pin {
+    Setpinpoint: (value: { lat: string; lng: string }) => void
+    Setadress: (value: { adress: string }) => void
+}
 
-const LocationPicker = () => {
+const LocationPicker = ({ Setpinpoint, Setadress }: pin) => {
 
-    // ✅ Own State
+
     const [position, setPosition] = useState<[number, number]>([
-        8.5241, 76.9366   // Default → Thiruvananthapuram
+        10.3423460, 76.1356248
     ])
 
     const [address, setAddress] = useState("")
     const [results, setResults] = useState<any[]>([])
 
-    // 🔍 Search place
+
     const searchPlace = async (query: string) => {
         if (!query) return setResults([])
 
@@ -38,23 +42,28 @@ const LocationPicker = () => {
                     },
                 }
             )
-            setResults(res.data)
+            setResults(res.data.address.suburb)
+            Setadress(res.data)
+
+
         } catch (err) {
             console.log(err)
         }
     }
 
-    // 📍 Select search result
+
     const selectPlace = (item: any) => {
         const lat = parseFloat(item.lat)
         const lng = parseFloat(item.lon)
 
         setPosition([lat, lng])
+
+        Setpinpoint({ lat: lat.toString(), lan: lng.toString() })
         setAddress(item.display_name)
         setResults([])
     }
 
-    // 🗺️ Map click
+
     const MapClickHandler = () => {
         useMapEvents({
             click: async (e) => {
@@ -62,13 +71,19 @@ const LocationPicker = () => {
                 setPosition([lat, lng])
 
                 try {
-                    const res = await axios.get(
-                        "https://nominatim.openstreetmap.org/reverse",
-                        {
-                            params: { lat, lon: lng, format: "json" },
-                        }
-                    )
-                    setAddress(res.data.display_name || "")
+                    const res = await fetch(`/api/location?lat=${lat}&lon=${lng}`);
+                    const data = await res.json();
+                    setAddress(data.display_name);
+                    console.log(data);
+
+                    Setpinpoint({
+                        lat: data.lat?.toString() || lat.toString(),
+                        lan: data.lon?.toString() || lng.toString(),
+                    });
+
+
+                    Setadress(data.display_name);
+
                 } catch (err) {
                     console.log(err)
                 }

@@ -65,5 +65,12 @@ export interface PostType {
     offerPrice?: Offerprice,
     likes?: Likes,
     views?: Likes,
-    userid?: Likes
+    usermail?: String
+    description: string,
+    createdAt: Date,
+    address: {
+        address: string,
+        lat: string,
+        lan: string
+    }
 }

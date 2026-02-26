@@ -1,4 +1,5 @@
-import { useMutation } from "@tanstack/react-query"
+"use client"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { MainapiCall } from "./Instance"
 
 type RegisterData = {
@@ -27,4 +28,28 @@ export const usePostdata = () => {
 
         }
     })
+}
+
+export const useLike = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async ({ username, propertyid }) => {
+            const res = await MainapiCall("PATCH", "/api/Likeunlike", {
+                username: username, propertyid: propertyid
+            }
+            )
+            if (res.status == 500) throw new Error("posting failed")
+            return res
+
+        },
+        onError: (error) => {
+            console.log("post failed", error);
+
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["postdata"] })
+
+        }
+    })
+
 }
