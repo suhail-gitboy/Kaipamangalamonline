@@ -11,7 +11,8 @@ export async function mainproxy(req: NextRequest) {
 
     const path = req.nextUrl.pathname
 
-    if (path.startsWith("/profile") && !token)
+    if ((path.startsWith("/profile") || path.startsWith("/upload")) &&
+        !token)
         return NextResponse.redirect(new URL("/login", req.url))
 
     if (path.startsWith("/admin")) {

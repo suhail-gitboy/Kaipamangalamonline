@@ -7,7 +7,7 @@ import { register } from "module";
 
 import { NextRequest, NextResponse } from "next/server";
 
-type imageType = {
+export type imageType = {
     url: string | null,
     public_ID: string | null
 }

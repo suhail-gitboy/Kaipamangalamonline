@@ -524,7 +524,51 @@ export const servicesAll = [
     },
 ]
 
+export const services = [
+    {
+        id: "hotel",
+        action: "/upload/serviceaspost/hotel",
+        icon: "/icons/delivery-bike.png",
 
+        title: "Hotels & Food Delivery",
+        desc: "Deliver your signature dishes and manage online orders from customers nearby.",
+    },
+    {
+        id: "auto",
+        action: "/upload/serviceaspost/autoservice",
+        icon: "/car.png",
+        title: "Auto & Rental Services",
+        desc: "Offer taxi rides, auto services, and vehicle rentals within Kaipamangalam.",
+    },
+    {
+        id: "offers",
+        icon: "/discount.png",
+        action: "/upload/exclusivelist/offer",
+        title: "Exclusive Offers",
+        desc: "Showcase special discounts and promotional deals for local customers.",
+    },
+    {
+        id: "promotion",
+        icon: "/promotion.png",
+        action: "/upload/exclusivelist/promotion",
+        title: "Promote your business",
+        desc: "Showcase your business,advertisement and promotional deals eclusively.",
+    },
+    {
+        id: "turf",
+        action: "/upload/serviceaspost/turf",
+        icon: "/football.png",
+        title: "Turf Booking",
+        desc: "Allow customers to view availability and book your sports turf easily.",
+    },
+    {
+        action: "/upload/serviceaspost/technician",
+        id: "technician",
+        icon: "/technician.png",
+        title: "Technician Services",
+        desc: "Provide electrician, plumbing, AC repair and other professional home services.",
+    },
+];
 
 
 

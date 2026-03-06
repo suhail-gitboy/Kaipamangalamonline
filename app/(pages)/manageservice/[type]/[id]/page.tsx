@@ -8,12 +8,6 @@ const Manage = async ({ params }: { params: { type: string, id: string } }) => {
 
 
     const { id, type } = await params
-    // const [image, setImage] = useState("/turf.jpg")
-
-    // const handleImg = (e: any) => {
-    //     const file = e.target.files?.[0]
-    //     if (!file) return
-    //     setImage(URL.createObjectURL(file))
 
     const FunctionSwitch = () => {
         switch (type) {

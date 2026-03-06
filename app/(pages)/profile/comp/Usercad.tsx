@@ -168,9 +168,9 @@ const UserCard = () => {
                                                 placeholder="Your name"
                                                 className="
           pl-10
-          border border-lime-200
-          focus:border-lime-500
-          focus:ring-1 focus:ring-lime-500
+        
+          
+          
           rounded-xl
           transition-all duration-200
         "
@@ -235,13 +235,16 @@ const UserCard = () => {
                                             {/* Refresh Profile */}
                                             <Button
                                                 type="button"
-                                                variant="outline"
+                                                variant={"ghost"}
                                                 className="
-        w-full sm:w-auto
+        w-2/4 mx-auto sm:w-auto
         gap-2
-        border-lime-200
-        hover:bg-lime-50
+        p-5
+        bg-gray-300
+        border-gray-200
+        hover:bg-gray-200
         rounded-xl
+        text-sm text-gray-700
         transition-all duration-200
       "
                                             >
@@ -249,21 +252,19 @@ const UserCard = () => {
                                                 Refresh Profile
                                             </Button>
 
-                                            {/* Save Changes */}
+
                                             <Button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="
-        w-full sm:w-auto
-        gap-2
-        bg-lime-500
-        hover:bg-lime-600
-        active:scale-[0.98]
-        text-black
-        rounded-xl
-        transition-all duration-200
-        shadow-sm
-      "
+                                                className=" w-2/4 mx-auto sm:w-auto
+                                            gap-2
+                                            p-5
+                                            bg-lime-300
+                                            border-lime-200
+                                            hover:bg-lime-200
+                                            rounded-xl
+                                            text-sm text-gray-700
+                                            transition-all duration-200"
                                             >
                                                 <Save size={16} />
                                                 Save Changes

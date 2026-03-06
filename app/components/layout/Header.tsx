@@ -18,14 +18,14 @@ const Header = () => {
     }
 
     const Activity: Activity[] = [
-        { activity: "chai spot", icon: "/icons/tea.png" },
+        { activity: "chaispot", icon: "/icons/tea.png" },
         { activity: "food", icon: "/icons/diet.png" },
         { activity: "grocery", icon: "/icons/shopping-bag.png" },
         { activity: "shops", icon: "/icons/store.png" },
         { activity: "tournaments", icon: "/icons/cricket.png" },
         { activity: "news", icon: "/icons/news-report.png" },
-        { activity: "real estate", icon: "/icons/search.png" },
-        { activity: "Fest", icon: "/icons/celebration.png" },
+        { activity: "realestate", icon: "/icons/search.png" },
+        { activity: "event", icon: "/icons/celebration.png" },
         { activity: "catering", icon: "/icons/catering.png" },
     ];
 
@@ -41,12 +41,11 @@ const Header = () => {
             <div className="hidden md:block">
                 <LocalNewsCard />
             </div>
-            {/* servicesicons */}
-
             <div className="md:flex justify-center overflow-hidden">
                 <div className="flex items-center  md:w-fit mx-4 space-x-1 scrollbar-hide overflow-x-auto">
                     {Activity.map((data) => (
                         <div
+                            onClick={() => router.push(`/explore?category=${data.activity}`)}
                             key={data.activity}
                             className="shrink-0 m-2 h-auto flex flex-col items-center"
                         >
@@ -63,7 +62,7 @@ const Header = () => {
             </div>
 
 
-            {/* activities and services */}
+
             <div className="">
                 <div className="pt-1 flex justify-center flex-col gap-5">
 

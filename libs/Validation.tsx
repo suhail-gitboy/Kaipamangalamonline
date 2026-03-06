@@ -39,3 +39,4 @@ export const ProfileSchema = Yup.object({
         .required("Name is required"),
     email: Yup.string().email(),
 })
+

@@ -17,7 +17,7 @@ const Adddetailbutton = () => {
 
             <div className="relative">
                 <Link
-                    href="/newpost"
+                    href="/selectservice"
                     className="group block cursor-pointer text-center transition-all"
                 >
                     <div className="flex items-center justify-center gap-2">
