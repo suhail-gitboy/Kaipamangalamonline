@@ -33,7 +33,8 @@ export const usePostdata = () => {
 export const useLike = () => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async ({ username, propertyid }) => {
+        mutationFn: async ({ username, propertyid
+        }: { username: string, propertyid: string }) => {
             const res = await MainapiCall("PATCH", "/api/Likeunlike", {
                 username: username, propertyid: propertyid
             }

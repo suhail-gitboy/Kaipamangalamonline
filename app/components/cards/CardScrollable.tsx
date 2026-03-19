@@ -29,7 +29,7 @@ const getCategoryIcon = (cat: string | undefined) => {
     }
 };
 import { CiCalendarDate } from "react-icons/ci";
-import { Likeunlike } from "@/app/ServerActions/LikeUnlike";
+
 import { useStore } from "@/app/zustandstate/Store";
 import { useSession } from "next-auth/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -69,10 +69,14 @@ interface Ficture {
     to: Date
 }
 export interface CardProps {
+    mobilenumber: string
     image: {
         url: string,
         public_id: string
     };
+    views: {
+
+    }[]
     title: string;
     description?: string;
     location?: string;
@@ -85,10 +89,11 @@ export interface CardProps {
     likes: {
         name: string,
         img: string
-    }
+    }[],
+    createdAt: Date
 }
 
-const CardScrollable = ({ data }: { data: PostType }) => {
+const CardScrollable = ({ data }: { data: CardProps }) => {
     const { data: session } = useSession()
     const { mutate } = useLike()
     let userdata = session?.user
@@ -170,7 +175,7 @@ const CardScrollable = ({ data }: { data: PostType }) => {
 
 
 
-                                            mutate({ username: userdata?.name, propertyid: _id })
+                                            mutate({ username: userdata?.name as string, propertyid: _id })
                                         }}
                                     >
                                         {liked ? <FaHeart /> : <FaRegHeart />}
@@ -245,18 +250,17 @@ const CardScrollable = ({ data }: { data: PostType }) => {
 
                             )}
 
-                            {/* Action Buttons */}
-                            {/* Action Footer */}
+
                             <div className="flex items-center justify-between mt-3  border-t border-gray-100 p-2">
-                                {/* Views and Likes */}
+
                                 <div className="flex items-center gap-4 text-xs text-gray-600">
-                                    {/* Views */}
+
                                     <div className="flex items-center gap-1">
                                         <FaEye className="text-lime-600" />
                                         <span>1.2k</span>
                                     </div>
 
-                                    {/* Likes */}
+
                                     <button
                                         type="button"
                                         className="flex items-center gap-1 text-red-500 hover:text-red-600 transition"
@@ -267,7 +271,7 @@ const CardScrollable = ({ data }: { data: PostType }) => {
 
 
 
-                                            mutate({ username: userdata?.name, propertyid: _id })
+                                            mutate({ username: userdata?.name as string, propertyid: _id })
                                         }}
                                     >
                                         {liked ? <FaHeart /> : <FaRegHeart />}
@@ -379,7 +383,7 @@ const CardScrollable = ({ data }: { data: PostType }) => {
 
 
 
-                                            mutate({ username: userdata?.name, propertyid: _id })
+                                            mutate({ username: userdata?.name as string, propertyid: _id })
                                         }}
                                     >
                                         {liked ? <FaHeart /> : <FaRegHeart />}
@@ -479,7 +483,7 @@ const CardScrollable = ({ data }: { data: PostType }) => {
 
 
 
-                                                mutate({ username: userdata?.name, propertyid: _id })
+                                                mutate({ username: userdata?.name as string, propertyid: _id })
                                             }}
                                         >
                                             {liked ? <FaHeart /> : <FaRegHeart />}
@@ -490,7 +494,7 @@ const CardScrollable = ({ data }: { data: PostType }) => {
                                     {/* ACTION BUTTON */}
                                     {category === "grocery" ? (
                                         <a
-                                            href={`tel:${mobilenumber}`}
+                                            href={`tel:${data.mobilenumber}`}
                                             className="flex items-center gap-2 bg-lime-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-lime-700 shadow-md transition text-sm"
                                         >
                                             Call to Buy

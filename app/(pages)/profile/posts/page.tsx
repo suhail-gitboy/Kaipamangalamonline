@@ -10,7 +10,7 @@ import { cookies } from 'next/headers'
 
 const page = async () => {
 
-    var property: Item[]=[]
+    var property: Item[] = []
     async function GEtpost() {
         try {
 
@@ -21,6 +21,7 @@ const page = async () => {
                 headers: {
                     cookie: cookieStore.toString()
                 },
+
                 cache: "no-store"
             })
 
