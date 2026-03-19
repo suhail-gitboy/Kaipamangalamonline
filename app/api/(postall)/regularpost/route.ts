@@ -4,8 +4,12 @@ import { Connectdb } from "@/libs/Configdb";
 import { Post } from "@/models/Post.model";
 import { User } from "@/models/User.model";
 import { register } from "module";
+import { getToken } from "next-auth/jwt";
+import { getServerSession } from "next-auth"
+
 
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "@/libs/auth";
 
 export type imageType = {
     url: string | null,
@@ -13,7 +17,7 @@ export type imageType = {
 }
 export async function POST(req: NextRequest) {
     const user = req.headers.get("email")
-    console.log(user);
+
 
 
     try {
@@ -102,3 +106,38 @@ export async function POST(req: NextRequest) {
 
 
 }
+export async function GET(req: NextRequest) {
+
+    await Connectdb()
+
+    try {
+
+        const session = await getServerSession(authOptions)
+
+        if (!session) throw new Error("no session")
+
+        const email = session.user?.email
+
+
+
+        const properties = await Post.find({ usermail: email })
+            .select("_id title image")
+
+        return NextResponse.json(
+            { properties },
+            { status: 200 }
+        )
+
+    } catch (error) {
+
+        console.error(error)
+
+        return NextResponse.json(
+            { message: "Internal Server Error" },
+            { status: 500 }
+        )
+
+    }
+}
+
+

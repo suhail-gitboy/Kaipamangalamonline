@@ -29,7 +29,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         }
 
         if (image) {
-            const arraybuffer = Buffer.from(await image.arrayBuffer())
+            const arraybuffer = Buffer.from(await image?.arrayBuffer())
         }
 
 

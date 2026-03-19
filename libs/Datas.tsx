@@ -666,3 +666,22 @@ export const turfs: TurfItem[] = [
         }
     }
 ];
+
+
+export const CARDui = [
+    {
+        img: "/card/Book a premium football turf.png",
+        link: "/services/turf"
+
+    },
+    {
+        img: "/card/food.png",
+        link: "/services/fooddelivery"
+
+    },
+    {
+        img: "/card/ChatGPT Image Mar 8, 2026, 03_55_43 PM.png",
+        link: "/services/autoservices"
+
+    }
+]

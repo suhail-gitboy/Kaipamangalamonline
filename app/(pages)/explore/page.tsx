@@ -6,12 +6,12 @@ import { Skeleton } from "@/shadcn/ui/skeleton"
 import Searchexplore from '@/app/components/layout/Searchexplore'
 import Barbottom from '@/app/components/layout/Barbottom'
 import CardScrollable from '@/app/components/cards/CardScrollable'
-import { Scrollabledatas } from '@/libs/Datas'
+import { CARDui, Scrollabledatas } from '@/libs/Datas'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
-
 import { useStore } from '@/app/zustandstate/Store'
 import { PostType } from '@/app/types'
+import Link from 'next/link'
 
 const page = () => {
 
@@ -65,13 +65,38 @@ const page = () => {
                                 <Skeleton className="aspect-video w-full" />
                             </CardContent>
                         </Card>
-                    )) : data?.allpost.length > 0 ? data?.allpost?.map((data: PostType, ind: any) => (
+                    )) : data?.allpost?.length > 0 ? data?.allpost?.map((data: PostType, ind: any) => (
                         <CardScrollable key={ind} data={data} />
                     )) : <div className='p-4 mt-30'><img src="/—Pngtree—error 404 page not found_6501259.png" className='w-full object-contain h-80' alt="" />
                     </div>}
                 </section>
 
+                <div>
+
+                </div>
+
+                <section className="
+
+    hidden md:block 
+    md:w-2/8 
+    md:sticky 
+    md:top-44 
+    self-start
+  ">
+
+                    <div className='overflow-auto scrollbar-hide h-130  w-full  flex flex-col space-y-2'>
+                        {
+                            CARDui?.map((item) => (<Link href={item.link}>
+                                <img className='opacity-100 hover:brightness-105 w-full rounded-2xl shadow h-50' src={item.img} alt="images" />
+
+                            </Link>))
+                        }
+
+                    </div>
+                </section>
             </main>
+
+
 
 
 

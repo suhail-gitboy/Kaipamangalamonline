@@ -3,9 +3,41 @@
 import Redirect from '@/app/components/rusable/Redirect'
 
 import React from 'react'
-import Profilepost from '../comp/Profilepost'
+import Profilepost, { Item } from '../comp/Profilepost'
+import { SERVERurl } from '@/app/APISERVICES/Instance'
+import { useStore } from '@/app/zustandstate/Store'
+import { cookies } from 'next/headers'
 
-const page = () => {
+const page = async () => {
+
+    var property: Item[]=[]
+    async function GEtpost() {
+        try {
+
+            const cookieStore = await cookies()
+
+            const res = await fetch(`${SERVERurl}/api/regularpost`, {
+                method: "GET",
+                headers: {
+                    cookie: cookieStore.toString()
+                },
+                cache: "no-store"
+            })
+
+            if (!res.ok) throw new Error("error fetching")
+
+            const resdata = await res.json()
+
+            property = resdata.properties
+
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+    }
+    await GEtpost()
+
+
 
     return (
         <div className='px-4 py-3 md:px-7 lg:px-25'>
@@ -18,9 +50,9 @@ const page = () => {
                 </h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                    {[...Array(6)].map((_, i) => (
-                        <Profilepost key={i} ind={i} />
-                    ))}
+                    {property.length > 0 ? property?.map((item: Item, i: any) => (
+                        <Profilepost key={i} item={item} />
+                    )) : <>no post yet</>}
                 </div>
             </div>
         </div>

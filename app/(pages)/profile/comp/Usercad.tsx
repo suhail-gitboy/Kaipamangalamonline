@@ -52,7 +52,7 @@ const UserCard = () => {
     ring-offset-2 ring-offset-background
     overflow-hidden
   ">
-                                    {/* IMAGE */}
+
                                     <img
                                         src={
                                             preview ? preview : session?.user?.image ? session?.user?.image : session?.user?.avatar
@@ -103,6 +103,7 @@ const UserCard = () => {
                                     hidden
                                     id="img"
                                     accept="image/*"
+                                    className="p-4"
                                     onChange={handleImgUpload}
                                 />
                             </label>
@@ -154,7 +155,7 @@ const UserCard = () => {
                                     <div>
 
 
-                                        <div className="relative">
+                                        <div className="relative ">
                                             <User
                                                 className="absolute left-3 top-1/2 -translate-y-1/2 text-lime-500"
                                                 size={18}

@@ -29,7 +29,7 @@ const Searchexplore = () => {
 
                 setShowNavbar(false);
             } else {
-                // scrolling up → show
+
                 setShowNavbar(true);
             }
             lastScrollY.current = window.scrollY;
@@ -48,19 +48,7 @@ const Searchexplore = () => {
     const Activity: Activity[] = [
         { activity: "all", icon: "", filter: "all" },
         { activity: "chaispot", icon: "/icons/tea.png", filter: "chaispot" },
-        // {
-        //     activity: "food delivery",
-        //     icon: "/icons/delivery-bike.png",
-        //     action: "fooddelivery"
-        // },
-        // {
-        //     activity: "auto service", icon: "/icons/taxi.png",
-        //     action: "autoservices"
-        // },
-        // {
-        //     activity: "book turf", icon: "/football.png",
-        //     action: "turf"
-        // },
+
         { activity: "news", icon: "/icons/news-report.png", filter: "news" },
 
         { activity: "fashion", icon: "/icons/clothes-hanger.png", filter: "cloths" },
@@ -121,7 +109,7 @@ const Searchexplore = () => {
       px-1
       md:flex-wrap
       md:justify-center
-      md:max-w-4xl
+      md:max-full
     "
                     >
                         {Activity.map((data, ind) => (

@@ -194,10 +194,10 @@ const CardScrollable = ({ data }: { data: PostType }) => {
                     </div>
                 );
 
-            case "sale":
+            case "realestate":
 
                 return (
-                    <div className="bg-white rounded-xl shadow-md w-full  mx-auto my-3 hover:shadow-lg transition-shadow duration-300 ">
+                    <div className="bg-white relative rounded-xl shadow-md w-full  mx-auto my-3 hover:shadow-lg transition-shadow duration-300 ">
 
                         <div className="relative w-full h-66">
                             <img src={image.url} alt={title} className="w-full h-full  rounded-t-2xl object-cover" />
@@ -212,31 +212,37 @@ const CardScrollable = ({ data }: { data: PostType }) => {
                         </div>
 
 
-                        <div className="p-1 flex flex-col gap-1">
-                            <h3 className="text-black font-semibold text-lg truncate">{title}</h3>
+                        <div className="p-1 flex flex-col px-3">
+                            <h3 className="text-black font-bold text-md  truncate">{title.toUpperCase()}</h3>
+                            <h3 className="text-neutral-500 font-semibold text-sm ">{description}</h3>
 
                             {/* Location */}
-                            {location && (
-                                <div className="flex items-center text-black gap-2">
-                                    <FaMapMarkerAlt className="text-lime-600" />
-                                    <span className="truncate">{location}</span>
-                                </div>
-                            )}
+                            <div className="flex justify-between mt-4">
+                                {location && (
+                                    <div className="flex items-center text-black gap-2">
+                                        <FaMapMarkerAlt className="text-lime-600" />
+                                        <span className="truncate">{location}</span>
+                                    </div>
+                                )}
 
-                            {/* Price */}
-                            {price && (
-                                <div className="flex items-center text-black gap-2">
-                                    <FaDollarSign className="text-lime-600" />
-                                    <span>{price}</span>
-                                </div>
-                            )}
+                                {/* Price */}
+                                {price && (
+                                    <div className="flex items-center text-black gap-2">
+                                        <FaDollarSign className="text-lime-600" />
+                                        <span>{price}</span>
+                                    </div>
+                                )}
 
+                            </div>
                             {/* Category */}
-                            {type && (
-                                <div className="flex items-center text-black gap-2">
-                                    <FaTag className="text-lime-600" />
-                                    <span>available for {type} </span>
+                            {category && (
+                                <div className="absolute bg-black/40 rounded-md p-2 top-2 right-2">
+                                    <div className=" flex items-center text-white text-xs font-semibold gap-2">
+                                        <FaTag className="text-lime-600" />
+                                        <span>available for sale </span>
+                                    </div>
                                 </div>
+
                             )}
 
                             {/* Action Buttons */}
@@ -270,10 +276,10 @@ const CardScrollable = ({ data }: { data: PostType }) => {
                                 </div>
 
                                 {/* Contact Button */}
-                                <button className="flex items-center gap-2 bg-lime-600 text-white px-4 py-1 rounded-lg font-semibold hover:bg-lime-700 shadow-md transition text-xs">
+                                <a href={`tel:${data.mobilenumber}`} className="flex items-center gap-2 bg-lime-600 text-white px-4 py-1 rounded-lg font-semibold hover:bg-lime-700 shadow-md transition text-xs">
                                     <FaMapMarkerAlt className="text-white" />
                                     Contact
-                                </button>
+                                </a>
                             </div>
 
                         </div>

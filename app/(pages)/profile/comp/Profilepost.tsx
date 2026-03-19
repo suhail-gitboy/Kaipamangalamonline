@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { Heart, Trash2 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -14,22 +14,55 @@ import {
     AlertDialogCancel,
     AlertDialogAction,
 } from "@/shadcn/ui/alert-dialog"
+import { useRouter } from 'next/navigation'
 
 
-type Prop = {
-    ind: number
+export interface Item {
+    _id: string,
+    image: {
+        url: string,
+        public_ID: string
+    },
+    title: string
+
 }
 
-const Profilepost = ({ ind }: Prop) => {
+type Prop = {
+
+    item: Item
+}
+
+const Profilepost = ({ item }: Prop) => {
+
+    const router = useRouter()
+
+    const [key, setKey] = useState<string | null>(null)
+
+
+    const deleteitem = async () => {
+
+        const res = await fetch(`/api/regularpost/${key}`, {
+            method: "DELETE"
+        })
+        const resdata = await res.json()
+
+        if (!resdata) throw new Error("error deleting")
+
+        alert("deleted successfully")
+
+        setKey(null)
+        router.refresh()
+
+    }
     return (
         <motion.div
-            key={ind}
+            key={item._id}
             whileHover={{ scale: 1.04 }}
             className="relative aspect-square rounded-2xl overflow-hidden group"
         >
-            {/* Post Image */}
+
             <img
-                src={`https://source.unsplash.com/random/600x600?social,${ind}`}
+                src={item?.image?.url}
                 alt="post"
                 className="w-full h-full object-cover group-hover:opacity-90 transition"
             />
@@ -47,6 +80,7 @@ const Profilepost = ({ ind }: Prop) => {
               transition
               hover:bg-red-500
             "
+                        onClick={() => setKey(item._id)}
                     >
                         <Trash2 size={16} />
                     </button>
@@ -69,9 +103,7 @@ const Profilepost = ({ ind }: Prop) => {
 
                         <AlertDialogAction
                             className="bg-red-500 hover:bg-red-600"
-                            onClick={() => {
-                                console.log("Deleted post", ind)
-                            }}
+                            onClick={deleteitem}
                         >
                             Delete
                         </AlertDialogAction>
@@ -79,16 +111,20 @@ const Profilepost = ({ ind }: Prop) => {
                 </AlertDialogContent>
             </AlertDialog>
 
-            {/* Likes Overlay */}
+
             <div className="
-        absolute bottom-2 right-2
-        bg-lime-500/90 text-white
-        text-xs px-2 py-1
-        rounded-full
-        flex items-center gap-1
+        absolute items-baseline-last bottom-1 right-2
+      
+        flex  gap-1
       ">
-                <Heart size={12} />
-                {Math.floor(Math.random() * 900 + 100)}
+                <p className='p-2 rounded-full bg-black/40 text-xs text-white'>{item.title}</p>
+                <div className='flex h-fit items-center  bg-lime-500/90 text-white
+        text-xs px-1 py-1
+        rounded-full'>
+                    <Heart size={12} />
+                    {Math.floor(Math.random() * 900 + 100)}
+                </div>
+
             </div>
         </motion.div>
     )

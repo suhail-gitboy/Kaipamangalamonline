@@ -20,7 +20,7 @@ export default function Home() {
 
 
       {/* for header nav */}
-      <header className="bg-linear-to-br md:from-orange-200 md:via-orange-300 md:to-orange-200 from-lime-200 via-lime-300 to-lime-100 ">
+      <header className="bg-linear-to-br md:from-lime-300 md:via-lime-300 md:to-lime-200 from-lime-200 via-lime-300 to-lime-100 ">
         <div className="px-4 pb-7 md:px-14 lg:px-17    h-auto ">
           <Nav />
           <Header />
