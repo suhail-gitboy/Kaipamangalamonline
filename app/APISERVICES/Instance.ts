@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 
-export const SERVERurl = "http://localhost:3000";
+export const SERVERurl = process.env.URL_APP;
 
 export async function MainapiCall<T = any>(
     method: Method,
