@@ -1,5 +1,5 @@
 
-
+export const dynamic = "force-dynamic";
 import Redirect from '@/app/components/rusable/Redirect'
 
 import React from 'react'

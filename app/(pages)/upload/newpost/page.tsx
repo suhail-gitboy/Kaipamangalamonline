@@ -23,8 +23,12 @@ import { useRouter } from "next/navigation"
 
 import { useEffect, useState } from "react"
 import { HandledEvents } from "react-swipeable/es/types"
-import LocationPicker from "@/app/(pages)/manageservice/uicard/Mappicker"
+import dynamic from "next/dynamic";
 
+const LocationPicker = dynamic(
+    () => import("@/app/(pages)/manageservice/uicard/Mappicker"),
+    { ssr: false }
+);
 const Page = () => {
     const { setPostField, postData } = useStore()
     const navigate = useRouter()
